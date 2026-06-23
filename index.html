@@ -59,6 +59,14 @@
   .market-card.ok { border-left-color:var(--green); }
   .market-card.warn { border-left-color:var(--yellow); }
   .market-card:hover { border-color:var(--border2); }
+  .analysis-box { background:var(--green-bg); border:1px solid rgba(0,255,136,0.16); border-radius:var(--radius); padding:10px 12px; margin-bottom:10px; }
+  .analysis-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  @media(max-width:620px){ .analysis-grid{ grid-template-columns:1fr; } }
+  .analysis-item span { display:block; font-size:10px; color:var(--text3); text-transform:uppercase; letter-spacing:.06em; }
+  .analysis-item strong { display:block; margin-top:2px; font-size:12px; color:var(--text); font-weight:600; }
+  .analysis-reason { margin-top:8px; padding-top:8px; border-top:1px solid rgba(0,255,136,0.12); font-size:12px; color:var(--text2); }
+  .game-audit { margin:-2px 0 12px 16px; color:var(--text3); font-size:11px; }
+  .model-note { background:var(--yellow-bg); border:1px solid rgba(240,165,0,.18); color:var(--text2); border-radius:var(--radius); padding:10px 12px; margin-bottom:16px; font-size:12px; }
 
   .market-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:14px; }
   .market-title { font-size:15px; font-weight:600; color:var(--text); line-height:1.4; }
@@ -137,8 +145,8 @@
 
 <main>
   <div class="page-header">
-    <h1>Gerador de mercados</h1>
-    <p>Gera automaticamente todos os campos prontos para cadastrar na FlipCerto, incluindo LMSR ideal e auto-resolução via FIFA.</p>
+    <h1>Curador de mercados</h1>
+    <p>Analisa várias linhas por partida, descarta mercados óbvios e entrega somente as melhores opções para a FlipCerto.</p>
   </div>
 
   <div class="config-card">
@@ -152,10 +160,10 @@
         </div>
       </div>
       <div class="config-field">
-        <label>Prob. Sim máxima permitida</label>
+        <label>Probabilidade máxima de qualquer lado</label>
         <div class="range-row" style="margin-top:8px;">
-          <input type="range" min="55" max="92" step="5" value="80" id="max-prob">
-          <span class="range-val" id="prob-out">80%</span>
+          <input type="range" min="60" max="85" step="5" value="75" id="max-prob">
+          <span class="range-val" id="prob-out">75%</span>
         </div>
       </div>
       <div class="config-field">
@@ -174,16 +182,24 @@
           <option value="150">2h30 (com prorrogação + pênaltis)</option>
         </select>
       </div>
+      <div class="config-field">
+        <label>Máximo de mercados por jogo</label>
+        <select id="markets-per-game">
+          <option value="3">3 melhores</option>
+          <option value="4" selected>4 melhores</option>
+          <option value="5">5 melhores</option>
+        </select>
+      </div>
     </div>
     <button class="btn-generate" onclick="generateMarkets()">
       <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M13.5 2.5L8 1 2.5 2.5 1 8l1.5 5.5L8 15l5.5-1.5L15 8z"/><path d="M8 5v3l2 1"/></svg>
-      Gerar mercados
+      Analisar e gerar mercados
     </button>
   </div>
 
   <div id="output">
     <div class="empty">
-      <p>Ajuste a configuração e clique em “Gerar mercados”.</p>
+      <p>Ajuste a configuração e clique em “Analisar e gerar mercados”.</p>
     </div>
   </div>
 </main>
@@ -244,27 +260,60 @@ const EXISTING = [
 function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,'').trim(); }
 function isDup(t){ const n=norm(t); return EXISTING.some(e=>n.includes(e)); }
 
-function calcProb(hStr, aStr, type){
-  const d = hStr - aStr;
-  const hw = Math.min(84, Math.max(30, 50 + d * 0.42));
-  if(type==='hw2')   return Math.round(hw * 0.58);
-  if(type==='hw3')   return Math.round(hw * 0.33);
-  if(type==='draw')  return Math.max(10, Math.round(28 - Math.abs(d)*0.18));
-  if(type==='away2') return Math.max(8,  Math.round(38 - d*0.48));
-  if(type==='t4')    return Math.max(10, Math.round(32 - Math.abs(d)*0.14));
-  if(type==='star2') return Math.max(10, Math.round(22 - d*0.08));
-  return 50;
+function clamp(v, min, max){ return Math.max(min, Math.min(max, v)); }
+
+function poissonDistribution(lambda, maxGoals=10){
+  const out = [Math.exp(-lambda)];
+  for(let k=1; k<=maxGoals; k++) out[k] = out[k-1] * lambda / k;
+  const sum = out.reduce((a,b)=>a+b,0);
+  out[maxGoals] += 1 - sum;
+  return out;
 }
 
-// LMSR b ideal: mercados equilibrados precisam de mais liquidez
-// b baixo = menos subsídio da plataforma, mas mais slippage
-// regra: quanto mais óbvio o resultado, menor o b (menos subsídio desperdiçado)
-function calcLMSR(prob){
-  if(prob <= 45) return { b: 200, tip: 'Mercado equilibrado — b alto garante liquidez dos dois lados' };
-  if(prob <= 55) return { b: 150, tip: 'Levemente desbalanceado — b médio, bom custo-benefício' };
-  if(prob <= 65) return { b: 100, tip: 'Moderadamente desbalanceado — b padrão' };
-  if(prob <= 75) return { b: 75,  tip: 'Resultado mais provável — b reduzido, subsidia menos' };
-  return               { b: 50,  tip: 'Muito desbalanceado — b mínimo, reduz risco da plataforma' };
+// Modelo-base sem odds externas: transforma a diferença de força em gols esperados
+// e usa Poisson para comparar várias linhas antes de sugerir um mercado.
+function analyzeGame(g){
+  const diff = g.hStr - g.aStr;
+  const totalGoals = clamp(2.55 + Math.abs(diff) * 0.012, 2.35, 3.25);
+  const homeShare = 1 / (1 + Math.exp(-diff / 18));
+  const homeXg = clamp(totalGoals * homeShare, 0.22, 3.05);
+  const awayXg = clamp(totalGoals - homeXg, 0.22, 3.05);
+  const homeDist = poissonDistribution(homeXg);
+  const awayDist = poissonDistribution(awayXg);
+  return {
+    homeXg, awayXg, homeDist, awayDist,
+    confidence: 58,
+    confidenceLabel:'média',
+    basis:'Poisson + força relativa',
+    caveat:'Sem consenso de casas ainda; use como triagem, não como cotação final.'
+  };
+}
+
+function jointProbability(model, predicate){
+  let p = 0;
+  for(let h=0; h<model.homeDist.length; h++){
+    for(let a=0; a<model.awayDist.length; a++){
+      if(predicate(h,a)) p += model.homeDist[h] * model.awayDist[a];
+    }
+  }
+  return clamp(p * 100, 0, 100);
+}
+
+function calcQuality(prob, model, commercial=78){
+  const balance = clamp(100 - Math.abs(prob - 50) * 2, 0, 100);
+  const resolvability = 100;
+  const speed = 95;
+  const score = balance*.40 + model.confidence*.20 + commercial*.15 + resolvability*.15 + speed*.10;
+  return { score:Math.round(score), balance:Math.round(balance) };
+}
+
+// b considera o equilíbrio dos dois lados; 15/85 é tão desequilibrado quanto 85/15.
+function calcLMSR(prob, quality){
+  const deviation = Math.abs(prob - 50);
+  if(deviation <= 8)  return { b:150, tip:`Linha muito equilibrada · qualidade ${quality}/100` };
+  if(deviation <= 15) return { b:125, tip:`Bom equilíbrio · qualidade ${quality}/100` };
+  if(deviation <= 22) return { b:100, tip:`Equilíbrio aceitável · qualidade ${quality}/100` };
+  return { b:75, tip:`Linha no limite de equilíbrio · qualidade ${quality}/100` };
 }
 
 function addDT(date, time, extraMins){
@@ -286,56 +335,104 @@ function gameDateTime(g){
   return new Date(y, m-1, d, h, mi);
 }
 
-function buildMarkets(g, maxP, closeMins, verifyMins){
+function marketText(g, kind, line){
   const dt  = fmtDate(g.date);
-  const cl  = addDT(g.date, g.time, -closeMins);
-  const vf  = addDT(g.date, g.time, verifyMins);
   const h=g.home, a=g.away;
-  const types = [
-    { title:`${h} x ${a} (${dt}) — ${h} vence por 2 ou mais gols na Copa 2026?`,
-      ptype:'hw2', cat:'Esportes',
-      desc:`Mercado de curto prazo sobre o placar final de ${h} x ${a}, válido pelo Grupo ${g.group} da Copa do Mundo 2026. Resolve no apito final dos 90 minutos.`,
-      rules:`Resolve SIM se ${h} vencer com diferença de 2 ou mais gols no tempo regulamentar (90 min). Prorrogação não conta. Se o jogo for suspenso ou cancelado, o mercado é reembolsado. Fonte: FIFA / transmissão oficial.`,
-      aiPrompt:`Acesse a página e verifique o placar final de ${h} x ${a}. Resolva SIM se ${h} venceu com 2+ gols de diferença nos 90 minutos. Resolva NÃO caso contrário. Se o resultado ainda não estiver disponível, aguarde confirmação.` },
-    { title:`${h} x ${a} (${dt}) — ${h} vence por 3 ou mais gols na Copa 2026?`,
-      ptype:'hw3', cat:'Esportes',
-      desc:`Mercado de placar elástico em ${h} x ${a} pelo Grupo ${g.group} da Copa do Mundo 2026. Resolve no apito final dos 90 minutos.`,
-      rules:`Resolve SIM se ${h} vencer com diferença de 3 ou mais gols no tempo regulamentar (90 min). Prorrogação não conta. Se suspenso/cancelado, reembolso. Fonte: FIFA.`,
-      aiPrompt:`Verifique o placar final de ${h} x ${a}. Resolva SIM se ${h} venceu com 3+ gols de diferença nos 90 minutos. Resolva NÃO caso contrário.` },
-    { title:`${h} x ${a} (${dt}) — ${a} marca 2 ou mais gols na Copa 2026?`,
-      ptype:'away2', cat:'Esportes',
-      desc:`Mercado focado no desempenho ofensivo de ${a} na partida contra ${h}, Grupo ${g.group} da Copa 2026.`,
-      rules:`Resolve SIM se ${a} marcar 2 ou mais gols no tempo regulamentar (90 min). Gols em prorrogação não contam. Fonte: FIFA / transmissão oficial.`,
-      aiPrompt:`Verifique quantos gols ${a} marcou na partida contra ${h} nos 90 minutos regulamentares. Resolva SIM se foram 2 ou mais. Resolva NÃO caso contrário.` },
-    { title:`${h} x ${a} (${dt}) — jogo termina empatado na Copa 2026?`,
-      ptype:'draw', cat:'Esportes',
-      desc:`Mercado de resultado final da partida ${h} x ${a} pelo Grupo ${g.group} da Copa do Mundo 2026.`,
-      rules:`Resolve SIM se o placar for igual para ambas as equipes ao fim dos 90 minutos. Prorrogação não conta. Fonte: FIFA.`,
-      aiPrompt:`Verifique o placar final de ${h} x ${a} após 90 minutos. Resolva SIM se terminou empatado. Resolva NÃO se houve vencedor nos 90 minutos.` },
-    { title:`${h} x ${a} (${dt}) — jogo tem 4 ou mais gols na Copa 2026?`,
-      ptype:'t4', cat:'Esportes',
-      desc:`Mercado de total de gols na partida ${h} x ${a}, Grupo ${g.group} da Copa do Mundo 2026. Soma dos gols das duas equipes nos 90 minutos.`,
-      rules:`Resolve SIM se a soma dos gols de ambas as equipes for 4 ou mais nos 90 minutos. Prorrogação não conta. Fonte: FIFA.`,
-      aiPrompt:`Verifique o placar final de ${h} x ${a}. Some os gols das duas equipes nos 90 minutos regulamentares. Resolva SIM se o total for 4 ou mais. Resolva NÃO caso contrário.` },
-  ];
+  const commonDesc = `Mercado de curto prazo para ${h} x ${a}, Grupo ${g.group} da Copa do Mundo 2026. Considera somente os 90 minutos regulamentares.`;
+  if(kind==='teamGoals'){
+    const team = line.side==='home' ? h : a;
+    return {
+      title:`${h} x ${a} (${dt}) — ${team} marca ${line.n} ou mais gols na Copa 2026?`,
+      desc:commonDesc,
+      rules:`Resolve SIM se ${team} marcar ${line.n} ou mais gols nos 90 minutos. Prorrogação não conta. Se o jogo for suspenso ou cancelado, o mercado é reembolsado.`,
+      aiPrompt:`Verifique o placar de ${h} x ${a} após 90 minutos. Resolva SIM se ${team} marcou ${line.n} ou mais gols; caso contrário, resolva NÃO.`
+    };
+  }
+  if(kind==='winBy'){
+    const team = line.side==='home' ? h : a;
+    return {
+      title:`${h} x ${a} (${dt}) — ${team} vence por ${line.n} ou mais gols de diferença?`,
+      desc:commonDesc,
+      rules:`Resolve SIM se ${team} vencer por diferença de ${line.n} ou mais gols nos 90 minutos. Prorrogação não conta. Se suspenso ou cancelado, reembolso.`,
+      aiPrompt:`Verifique o placar final de ${h} x ${a} após 90 minutos. Resolva SIM se ${team} venceu por ${line.n}+ gols de diferença; caso contrário, resolva NÃO.`
+    };
+  }
+  if(kind==='totalGoals'){
+    return {
+      title:`${h} x ${a} (${dt}) — o jogo tem ${line.n} ou mais gols na Copa 2026?`,
+      desc:commonDesc,
+      rules:`Resolve SIM se a soma dos gols das duas equipes for ${line.n} ou mais nos 90 minutos. Prorrogação não conta.`,
+      aiPrompt:`Some os gols de ${h} e ${a} após 90 minutos. Resolva SIM se o total for ${line.n} ou mais; caso contrário, resolva NÃO.`
+    };
+  }
+  if(kind==='draw'){
+    return {
+      title:`${h} x ${a} (${dt}) — o jogo termina empatado na Copa 2026?`,
+      desc:commonDesc,
+      rules:'Resolve SIM se o placar estiver empatado ao fim dos 90 minutos. Prorrogação não conta.',
+      aiPrompt:`Verifique o placar de ${h} x ${a} após 90 minutos. Resolva SIM se terminou empatado; caso contrário, resolva NÃO.`
+    };
+  }
+  return {
+    title:`${h} x ${a} (${dt}) — ambas as seleções marcam na Copa 2026?`,
+    desc:commonDesc,
+    rules:'Resolve SIM se as duas equipes marcarem pelo menos um gol nos 90 minutos. Prorrogação não conta.',
+    aiPrompt:`Verifique o placar de ${h} x ${a} após 90 minutos. Resolva SIM se ambas marcaram; caso contrário, resolva NÃO.`
+  };
+}
 
-  (g.stars||[]).forEach(star => {
-    types.push({
-      title:`${h} x ${a} (${dt}) — ${star} marca 2 ou mais gols na Copa 2026?`,
-      ptype:'star2', cat:'Esportes',
-      desc:`Mercado individual sobre ${star} na partida ${h} x ${a} pelo Grupo ${g.group} da Copa do Mundo 2026.`,
-      rules:`Resolve SIM se ${star} marcar 2 ou mais gols no tempo regulamentar (90 min). Gols em prorrogação não contam. Fonte: FIFA / transmissão oficial.`,
-      aiPrompt:`Verifique quantos gols ${star} marcou na partida ${h} x ${a} nos 90 minutos regulamentares. Resolva SIM se foram 2 ou mais. Resolva NÃO caso contrário.`
+function buildCandidates(g, model){
+  const candidates = [];
+  const add = (kind, line, predicate, commercial=78) => {
+    const pExact = jointProbability(model, predicate);
+    const text = marketText(g, kind, line);
+    const quality = calcQuality(pExact, model, commercial);
+    candidates.push({ ...text, kind, line, p:Math.round(pExact), pExact, quality });
+  };
+
+  for(const n of [1,2,3,4]){
+    add('teamGoals',{side:'home',n},(h)=>h>=n, n===1?68:82);
+    add('teamGoals',{side:'away',n},(_,a)=>a>=n, n===1?68:82);
+  }
+  for(const n of [1,2,3,4]){
+    add('winBy',{side:'home',n},(h,a)=>h-a>=n,84);
+    add('winBy',{side:'away',n},(h,a)=>a-h>=n,84);
+  }
+  for(const n of [2,3,4,5]){
+    add('totalGoals',{n},(h,a)=>h+a>=n,80);
+  }
+  add('draw',{},(h,a)=>h===a,74);
+  add('bothScore',{},(h,a)=>h>0&&a>0,82);
+  return candidates;
+}
+
+function buildMarkets(g, maxP, closeMins, verifyMins, maxMarkets){
+  const cl = addDT(g.date, g.time, -closeMins);
+  const vf = addDT(g.date, g.time, verifyMins);
+  const minP = 100 - maxP;
+  const model = analyzeGame(g);
+  const candidates = buildCandidates(g, model);
+  const ranked = candidates
+    .filter(m => !isDup(m.title))
+    .filter(m => m.pExact >= minP && m.pExact <= maxP)
+    .filter(m => m.quality.score >= 68)
+    .sort((a,b) => b.quality.score-a.quality.score || Math.abs(a.pExact-50)-Math.abs(b.pExact-50));
+  const diverse = [];
+  const usedKinds = new Set();
+  for(const candidate of ranked){
+    if(usedKinds.has(candidate.kind)) continue;
+    usedKinds.add(candidate.kind);
+    diverse.push(candidate);
+    if(diverse.length >= maxMarkets) break;
+  }
+  const accepted = diverse.map(m => {
+      const reason = `Linha escolhida entre ${candidates.length} candidatas por equilíbrio e clareza. SIM ${m.p}% / NÃO ${100-m.p}%.`;
+      return {
+        ...m, status:'ok', cat:'Esportes', cl:cl.fmt, vf:vf.fmt, vfISO:vf.iso,
+        lmsr:calcLMSR(m.pExact,m.quality.score), fifaUrl:g.fifaUrl, model, reason
+      };
     });
-  });
-
-  return types.map(m => {
-    const p = calcProb(g.hStr, g.aStr, m.ptype);
-    const dup = isDup(m.title);
-    const status = dup ? 'skip' : (p > maxP ? 'warn' : 'ok');
-    const lmsr = calcLMSR(p);
-    return { ...m, p, status, cl: cl.fmt, vf: vf.fmt, vfISO: vf.iso, lmsr, fifaUrl: g.fifaUrl };
-  }).filter(m => m.status !== 'skip');
+  return { markets:accepted, analyzed:candidates.length, discarded:candidates.length-accepted.length, model };
 }
 
 let allMarkets = [];
@@ -346,6 +443,7 @@ function generateMarkets(){
   const maxP       = +document.getElementById('max-prob').value;
   const closeMins  = +document.getElementById('close-before').value;
   const verifyMins = +document.getElementById('verify-after').value;
+  const maxMarkets = +document.getElementById('markets-per-game').value;
   const out  = document.getElementById('output');
   const bar  = document.getElementById('copy-all-bar');
 
@@ -359,52 +457,63 @@ function generateMarkets(){
     cutoff.setHours(23, 59, 59, 999);
 
     allGames = []; allMarkets = [];
+    let analyzedTotal = 0;
+    let discardedTotal = 0;
     GAMES.forEach(g => {
       const kickoff = gameDateTime(g);
       if(kickoff <= now || kickoff > cutoff) return;
-      const markets = buildMarkets(g, maxP, closeMins, verifyMins);
-      if(markets.length){ allGames.push({game:g, markets}); allMarkets.push(...markets); }
+      const result = buildMarkets(g, maxP, closeMins, verifyMins, maxMarkets);
+      analyzedTotal += result.analyzed;
+      discardedTotal += result.discarded;
+      if(result.markets.length){
+        allGames.push({game:g, ...result});
+        allMarkets.push(...result.markets);
+      }
     });
 
-    const ok   = allMarkets.filter(m=>m.status==='ok').length;
-    const warn = allMarkets.filter(m=>m.status==='warn').length;
+    const ok = allMarkets.length;
 
-    let html = `<div class="stats-row">
-      <div class="stat-card"><div class="stat-num">${allMarkets.length}</div><div class="stat-label">mercados gerados</div></div>
+    let html = `<div class="model-note"><strong>Curadoria ativa:</strong> o agente testa várias linhas por partida e só exibe as que mantêm SIM e NÃO abaixo de ${maxP}%. Probabilidades atuais são uma triagem por Poisson e força relativa; odds externas ainda serão a camada de confirmação.</div>
+    <div class="stats-row">
+      <div class="stat-card"><div class="stat-num">${analyzedTotal}</div><div class="stat-label">candidatos analisados</div></div>
       <div class="stat-card"><div class="stat-num" style="color:var(--green)">${ok}</div><div class="stat-label">prontos para criar</div></div>
-      <div class="stat-card"><div class="stat-num" style="color:var(--yellow)">${warn}</div><div class="stat-label">muito óbvios</div></div>
-    </div>
-    <div class="filter-row">
-      <button class="filter-btn active" onclick="setFilter('all',this)">Todos (${allMarkets.length})</button>
-      <button class="filter-btn" onclick="setFilter('ok',this)">Prontos (${ok})</button>
-      <button class="filter-btn" onclick="setFilter('warn',this)">Óbvios (${warn})</button>
+      <div class="stat-card"><div class="stat-num" style="color:var(--yellow)">${discardedTotal}</div><div class="stat-label">descartados pelo agente</div></div>
     </div>`;
 
     let mIdx = 0;
-    allGames.forEach(({game:g, markets}) => {
+    allGames.forEach(({game:g, markets, analyzed:gameAnalyzed, discarded:gameDiscarded, model}) => {
       html += `<div class="game-group">
         <div class="game-header">
           <div class="game-dot"></div>
           <span class="game-header-title">${g.home} x ${g.away}</span>
           <span class="game-header-time">${fmtDate(g.date)} · ${g.time} · Grupo ${g.group}</span>
-        </div>`;
+        </div>
+        <div class="game-audit">${gameAnalyzed} linhas testadas · ${gameDiscarded} descartadas · gols esperados ${g.home} ${model.homeXg.toFixed(2)} x ${model.awayXg.toFixed(2)} ${g.away}</div>`;
 
       markets.forEach(m => {
         const i   = mIdx++;
-        const pc  = m.p > 75 ? 'var(--red)' : m.p > 60 ? 'var(--yellow)' : 'var(--green)';
-        const plabel = m.p > 75 ? `<span style="color:var(--red);font-weight:600">prob. Sim ≈ ${m.p}%</span>` :
-                       m.p > 60 ? `<span style="color:var(--yellow);font-weight:600">prob. Sim ≈ ${m.p}%</span>` :
-                                  `<span style="color:var(--green);font-weight:600">prob. Sim ≈ ${m.p}%</span>`;
+        const deviation = Math.abs(m.p-50);
+        const pc = deviation > 20 ? 'var(--yellow)' : 'var(--green)';
+        const plabel = `<span style="color:${pc};font-weight:600">SIM ≈ ${m.p}% · NÃO ≈ ${100-m.p}%</span>`;
 
         html += `<div class="market-card ${m.status}" data-status="${m.status}">
           <div class="market-header">
             <span class="market-title">${m.title}</span>
-            <span class="badge ${m.status==='ok'?'badge-ok':'badge-warn'}">${m.status==='ok'?'criar':'óbvio'}</span>
+            <span class="badge badge-ok">nota ${m.quality.score}</span>
           </div>
 
           <div class="prob-row">
             <div class="prob-bar"><div class="prob-fill" style="width:${m.p}%;background:${pc}"></div></div>
             ${plabel}
+          </div>
+
+          <div class="analysis-box">
+            <div class="analysis-grid">
+              <div class="analysis-item"><span>Confiança dos dados</span><strong>${m.model.confidenceLabel} · ${m.model.confidence}/100</strong></div>
+              <div class="analysis-item"><span>Base da análise</span><strong>${m.model.basis}</strong></div>
+              <div class="analysis-item"><span>Equilíbrio da linha</span><strong>${m.quality.balance}/100</strong></div>
+            </div>
+            <div class="analysis-reason">${m.reason} ${m.model.caveat}</div>
           </div>
 
           <div class="fields-grid">
@@ -509,6 +618,13 @@ FECHA EM (Closes at): ${m.cl}
 LMSR LIQUIDITY B: ${m.lmsr.b}
 → ${m.lmsr.tip}
 
+ANÁLISE DO AGENTE:
+  Probabilidade: SIM ${m.p}% / NÃO ${100-m.p}%
+  Nota de qualidade: ${m.quality.score}/100
+  Confiança dos dados: ${m.model.confidenceLabel} (${m.model.confidence}/100)
+  Base: ${m.model.basis}
+  Justificativa: ${m.reason}
+
 DESCRIÇÃO:
 ${m.desc}
 
@@ -537,6 +653,7 @@ TÍTULO: ${m.title}
 CATEGORIA: Esportes
 FECHA EM: ${m.cl}
 LMSR B: ${m.lmsr.b} (${m.lmsr.tip})
+ANÁLISE: SIM ${m.p}% / NÃO ${100-m.p}% · nota ${m.quality.score}/100 · confiança ${m.model.confidenceLabel}
 DESCRIÇÃO: ${m.desc}
 REGRAS: ${m.rules}
 AUTO-RES SOURCE: ${m.fifaUrl}
