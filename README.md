@@ -15,13 +15,9 @@ fonte falhar, recalcula a inteligência das partidas e publica o GitHub Pages.
 
 ## Odds de bookmakers
 
-O pipeline funciona sem chave usando Poisson e força relativa. Para ativar
-consenso de bookmakers, adicione no repositório:
-
-`Settings → Secrets and variables → Actions → New repository secret`
-
-Nome: `ODDS_API_KEY`
-
-Valor: chave da [The Odds API](https://the-odds-api.com/).
-
-A chave fica somente no GitHub Actions e nunca é enviada ao navegador.
+O botão consulta o Worker
+`https://flipcerto-odds.igordangelo.workers.dev/odds` antes de gerar mercados.
+O Worker mantém a chave da [The Odds API](https://the-odds-api.com/) em segredo,
+remove a margem das casas e compartilha um cache de 3 horas entre todos os
+usuários. Se as odds falharem, o site usa automaticamente Poisson e força
+relativa.

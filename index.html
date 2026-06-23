@@ -44,6 +44,7 @@
   .btn-generate { width:100%; background:var(--green); color:#0d1117; border:none; border-radius:var(--radius); padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.15s; }
   .btn-generate:hover { background:var(--green-dim); }
   .btn-generate:active { transform:scale(0.98); }
+  .btn-generate:disabled { opacity:.65; cursor:wait; transform:none; }
 
   .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
   .stat-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:14px 16px; text-align:center; }
@@ -257,6 +258,57 @@ let GAMES = [
   { date:'2026-06-27', time:'23:00', home:'Jordânia', away:'Argentina', hStr:48, aStr:92, group:'J', stars:['Messi'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021495' },
 ];
 let INTELLIGENCE_META = null;
+let LIVE_ODDS_SUMMARY = { matches:0, bookmakers:0, status:'idle' };
+const ODDS_WORKER_URL = 'https://flipcerto-odds.igordangelo.workers.dev/odds';
+const ODDS_TEAM_ALIASES = {
+  'africadosul':'southafrica',
+  'alemanha':'germany',
+  'argelia':'algeria',
+  'arabiasaudita':'saudiarabia',
+  'australia':'australia',
+  'austria':'austria',
+  'belgica':'belgium',
+  'bosniaeherzegovina':'bosniaherzegovina',
+  'brasil':'brazil',
+  'caboverde':'capeverde',
+  'canada':'canada',
+  'catar':'qatar',
+  'colombia':'colombia',
+  'costadomarfim':'ivorycoast',
+  'croacia':'croatia',
+  'curacau':'curacao',
+  'egito':'egypt',
+  'equador':'ecuador',
+  'escocia':'scotland',
+  'espanha':'spain',
+  'eua':'usa',
+  'franca':'france',
+  'gana':'ghana',
+  'haiti':'haiti',
+  'holanda':'netherlands',
+  'inglaterra':'england',
+  'iraque':'iraq',
+  'japao':'japan',
+  'jordania':'jordan',
+  'marrocos':'morocco',
+  'mexico':'mexico',
+  'noruega':'norway',
+  'novazelandia':'newzealand',
+  'panama':'panama',
+  'paraguai':'paraguay',
+  'portugal':'portugal',
+  'rddocongo':'drcongo',
+  'republicadacoreia':'southkorea',
+  'ridoira':'iran',
+  'senegal':'senegal',
+  'suecia':'sweden',
+  'suica':'switzerland',
+  'tchequia':'czechrepublic',
+  'tunisia':'tunisia',
+  'turquia':'turkey',
+  'uruguai':'uruguay',
+  'uzbequistao':'uzbekistan'
+};
 
 const EXISTING = [
   'argentina vence austria','franca vence iraque','messi ira marcar 2 ou mais gols',
@@ -354,6 +406,78 @@ function gameDateTime(g){
   const [y,m,d] = g.date.split('-').map(Number);
   const [h,mi] = g.time.split(':').map(Number);
   return new Date(y, m-1, d, h, mi);
+}
+
+function compactNorm(s){ return norm(s).replace(/\s+/g,''); }
+function oddsTeamKey(s){
+  const key = compactNorm(s);
+  return ODDS_TEAM_ALIASES[key] || key;
+}
+
+function findLiveOddsEvent(g, events){
+  const home = oddsTeamKey(g.home);
+  const away = oddsTeamKey(g.away);
+  return events.find(event => {
+    const eventHome = event.homeKey || compactNorm(event.homeTeam || '');
+    const eventAway = event.awayKey || compactNorm(event.awayTeam || '');
+    return (eventHome.includes(home) || home.includes(eventHome)) &&
+           (eventAway.includes(away) || away.includes(eventAway));
+  });
+}
+
+async function refreshLiveOdds(){
+  const status = document.getElementById('data-status');
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 12000);
+  try {
+    status.innerHTML = '<span><span class="status-dot"></span><strong>Consultando bookmakers...</strong></span><span>aguarde antes da curadoria</span>';
+    const response = await fetch(`${ODDS_WORKER_URL}?v=${Date.now()}`, {
+      cache:'no-store',
+      signal:controller.signal
+    });
+    const data = await response.json();
+    if(!response.ok || !data.ok) throw new Error(data.detail || data.error || `HTTP ${response.status}`);
+
+    let matches = 0;
+    let bookmakers = 0;
+    GAMES = GAMES.map(game => {
+      const event = findLiveOddsEvent(game, data.events || []);
+      if(!event || event.bookmakers < 3) return game;
+      const homeP = event.consensus?.[event.homeKey];
+      const awayP = event.consensus?.[event.awayKey];
+      if(!Number.isFinite(homeP) || !Number.isFinite(awayP)) return game;
+      const directionalShare = homeP / (homeP + awayP);
+      const homeShare = clamp(.5 + (directionalShare - .5) * .82, .16, .84);
+      const currentTotal = (game.intelligence?.homeXg || 1.3) + (game.intelligence?.awayXg || 1.3);
+      const totalGoals = clamp(event.totalLine ? event.totalLine + .10 : currentTotal, 1.9, 4.1);
+      matches++;
+      bookmakers = Math.max(bookmakers,event.bookmakers);
+      return {
+        ...game,
+        intelligence:{
+          ...(game.intelligence || {}),
+          homeXg:totalGoals * homeShare,
+          awayXg:totalGoals * (1-homeShare),
+          confidence:82,
+          confidenceLabel:'alta',
+          basis:`Consenso de ${event.bookmakers} casas + Poisson`,
+          caveat:'Probabilidade calibrada com odds atuais e margem removida.',
+          odds:event
+        }
+      };
+    });
+    LIVE_ODDS_SUMMARY = { matches, bookmakers, status:matches?'live':'no-matches' };
+    const updated = new Date(data.generatedAt).toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'});
+    status.innerHTML = matches
+      ? `<span><span class="status-dot live"></span><strong>Odds ao vivo conectadas</strong></span><span>${matches} jogos · até ${bookmakers} casas · ${updated}</span>`
+      : `<span><span class="status-dot"></span><strong>Sem odds compatíveis agora</strong></span><span>usando modelo automático</span>`;
+  } catch(error) {
+    LIVE_ODDS_SUMMARY = { matches:0, bookmakers:0, status:'fallback' };
+    const message = error.name==='AbortError' ? 'tempo limite excedido' : error.message;
+    status.innerHTML = `<span><span class="status-dot"></span><strong>Odds indisponíveis; fallback ativo</strong></span><span>${message}</span>`;
+  } finally {
+    clearTimeout(timeout);
+  }
 }
 
 function marketText(g, kind, line){
@@ -459,7 +583,7 @@ function buildMarkets(g, maxP, closeMins, verifyMins, maxMarkets){
 let allMarkets = [];
 let allGames   = [];
 
-function generateMarkets(){
+async function generateMarkets(){
   const daysAhead  = +document.getElementById('days-ahead').value;
   const maxP       = +document.getElementById('max-prob').value;
   const closeMins  = +document.getElementById('close-before').value;
@@ -467,9 +591,13 @@ function generateMarkets(){
   const maxMarkets = +document.getElementById('markets-per-game').value;
   const out  = document.getElementById('output');
   const bar  = document.getElementById('copy-all-bar');
+  const button = document.querySelector('.btn-generate');
 
-  out.innerHTML = '<div class="loading"><span class="spinner"></span>Gerando mercados...</div>';
+  button.disabled = true;
+  button.innerHTML = '<span class="spinner" style="border-color:rgba(13,17,23,.3);border-top-color:#0d1117;margin:0"></span>Atualizando odds e analisando...';
+  out.innerHTML = '<div class="loading"><span class="spinner"></span>Consultando dados atuais antes de gerar...</div>';
   bar.classList.remove('visible');
+  await refreshLiveOdds();
 
   setTimeout(() => {
     const now = new Date();
@@ -494,7 +622,10 @@ function generateMarkets(){
 
     const ok = allMarkets.length;
 
-    let html = `<div class="model-note"><strong>Curadoria ativa:</strong> o agente testa várias linhas por partida e só exibe as que mantêm SIM e NÃO abaixo de ${maxP}%. Probabilidades atuais são uma triagem por Poisson e força relativa; odds externas ainda serão a camada de confirmação.</div>
+    const sourceNote = LIVE_ODDS_SUMMARY.matches
+      ? `Odds atuais calibraram ${LIVE_ODDS_SUMMARY.matches} partidas com consenso de bookmakers. As demais usam o fallback Poisson.`
+      : 'Nenhuma odd compatível foi recebida; esta rodada usa o fallback Poisson e força relativa.';
+    let html = `<div class="model-note"><strong>Curadoria ativa:</strong> o agente testa várias linhas por partida e só exibe as que mantêm SIM e NÃO abaixo de ${maxP}%. ${sourceNote}</div>
     <div class="stats-row">
       <div class="stat-card"><div class="stat-num">${analyzedTotal}</div><div class="stat-label">candidatos analisados</div></div>
       <div class="stat-card"><div class="stat-num" style="color:var(--green)">${ok}</div><div class="stat-label">prontos para criar</div></div>
@@ -609,6 +740,8 @@ function generateMarkets(){
       document.getElementById('copy-all-label').textContent = `${ok} mercados prontos`;
       bar.classList.add('visible');
     }
+    button.disabled = false;
+    button.innerHTML = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M13.5 2.5L8 1 2.5 2.5 1 8l1.5 5.5L8 15l5.5-1.5L15 8z"/><path d="M8 5v3l2 1"/></svg>Analisar e gerar mercados';
   }, 400);
 }
 
