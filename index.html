@@ -6,348 +6,123 @@
 <title>Agente de Mercados · FlipCerto</title>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   :root {
-    --bg: #0d1117;
-    --bg2: #161b22;
-    --bg3: #1c2330;
-    --border: #30363d;
-    --border2: #3d444d;
-    --green: #00ff88;
-    --green-dim: #00cc6a;
-    --green-bg: rgba(0,255,136,0.08);
-    --yellow: #f0a500;
-    --yellow-bg: rgba(240,165,0,0.08);
-    --red: #f85149;
-    --red-bg: rgba(248,81,73,0.08);
-    --text: #e6edf3;
-    --text2: #8b949e;
-    --text3: #656d76;
-    --radius: 8px;
-    --radius-lg: 12px;
+    --bg: #0d1117; --bg2: #161b22; --bg3: #1c2330;
+    --border: #30363d; --border2: #3d444d;
+    --green: #00ff88; --green-dim: #00cc6a; --green-bg: rgba(0,255,136,0.08);
+    --yellow: #f0a500; --yellow-bg: rgba(240,165,0,0.08);
+    --blue: #58a6ff; --blue-bg: rgba(88,166,255,0.08);
+    --red: #f85149; --red-bg: rgba(248,81,73,0.08);
+    --text: #e6edf3; --text2: #8b949e; --text3: #656d76;
+    --radius: 8px; --radius-lg: 12px;
   }
+  body { background:var(--bg); color:var(--text); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; font-size:14px; line-height:1.6; min-height:100vh; }
 
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-    font-size: 14px;
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+  nav { background:var(--bg); border-bottom:1px solid var(--border); padding:0 24px; display:flex; align-items:center; justify-content:space-between; height:56px; position:sticky; top:0; z-index:100; }
+  .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; color:var(--text); font-weight:600; font-size:16px; }
+  .nav-logo img { width:28px; height:28px; border-radius:6px; }
+  .nav-badge { font-size:11px; background:var(--green-bg); color:var(--green); border:1px solid rgba(0,255,136,0.2); padding:2px 8px; border-radius:20px; font-weight:500; }
+  .nav-link { color:var(--text2); text-decoration:none; font-size:13px; display:flex; align-items:center; gap:6px; }
+  .nav-link:hover { color:var(--text); }
 
-  /* NAV */
-  nav {
-    background: var(--bg);
-    border-bottom: 1px solid var(--border);
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 56px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .nav-logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--text);
-    font-weight: 600;
-    font-size: 16px;
-  }
-  .nav-logo img { width: 28px; height: 28px; border-radius: 6px; }
-  .nav-badge {
-    font-size: 11px;
-    background: var(--green-bg);
-    color: var(--green);
-    border: 1px solid rgba(0,255,136,0.2);
-    padding: 2px 8px;
-    border-radius: 20px;
-    font-weight: 500;
-  }
-  .nav-link {
-    color: var(--text2);
-    text-decoration: none;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .nav-link:hover { color: var(--text); }
+  main { max-width:820px; margin:0 auto; padding:32px 20px 100px; }
+  .page-header { margin-bottom:28px; }
+  .page-header h1 { font-size:22px; font-weight:600; color:var(--text); margin-bottom:4px; }
+  .page-header p { color:var(--text2); font-size:13px; }
 
-  /* LAYOUT */
-  main { max-width: 800px; margin: 0 auto; padding: 32px 20px 80px; }
+  .config-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:20px; margin-bottom:20px; }
+  .config-title { font-size:11px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:16px; }
+  .config-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:16px; }
+  @media(max-width:520px){ .config-grid{ grid-template-columns:1fr; } }
+  .config-field label { display:block; font-size:12px; color:var(--text2); margin-bottom:6px; }
+  .config-field select { width:100%; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); color:var(--text); padding:8px 10px; font-size:13px; outline:none; appearance:none; }
+  .config-field select:focus { border-color:var(--green); }
+  .range-row { display:flex; align-items:center; gap:10px; }
+  .range-row input[type=range] { flex:1; -webkit-appearance:none; height:4px; background:var(--border2); border-radius:2px; outline:none; }
+  .range-row input[type=range]::-webkit-slider-thumb { -webkit-appearance:none; width:16px; height:16px; background:var(--green); border-radius:50%; cursor:pointer; }
+  .range-val { font-size:13px; font-weight:600; color:var(--green); min-width:36px; text-align:right; }
+  .btn-generate { width:100%; background:var(--green); color:#0d1117; border:none; border-radius:var(--radius); padding:11px 20px; font-size:14px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; transition:background 0.15s; }
+  .btn-generate:hover { background:var(--green-dim); }
+  .btn-generate:active { transform:scale(0.98); }
 
-  .page-header { margin-bottom: 28px; }
-  .page-header h1 { font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-  .page-header p { color: var(--text2); font-size: 13px; }
+  .stats-row { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-bottom:20px; }
+  .stat-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius); padding:14px 16px; text-align:center; }
+  .stat-num { font-size:24px; font-weight:700; line-height:1; margin-bottom:4px; }
+  .stat-label { font-size:11px; color:var(--text2); }
 
-  /* CONFIG CARD */
-  .config-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 20px;
-    margin-bottom: 20px;
-  }
-  .config-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 16px;
-  }
-  .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
-  @media (max-width: 500px) { .config-grid { grid-template-columns: 1fr; } }
+  .filter-row { display:flex; gap:6px; margin-bottom:16px; flex-wrap:wrap; }
+  .filter-btn { background:transparent; border:1px solid var(--border); border-radius:20px; color:var(--text2); font-size:12px; padding:4px 14px; cursor:pointer; transition:all 0.15s; }
+  .filter-btn:hover { border-color:var(--border2); color:var(--text); }
+  .filter-btn.active { background:var(--green-bg); border-color:rgba(0,255,136,0.3); color:var(--green); }
 
-  .config-field label {
-    display: block;
-    font-size: 12px;
-    color: var(--text2);
-    margin-bottom: 6px;
-  }
-  .config-field select,
-  .config-field input[type=number] {
-    width: 100%;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text);
-    padding: 8px 10px;
-    font-size: 13px;
-    outline: none;
-    appearance: none;
-  }
-  .config-field select:focus,
-  .config-field input:focus { border-color: var(--green); }
+  .market-card { background:var(--bg2); border:1px solid var(--border); border-radius:var(--radius-lg); padding:18px; margin-bottom:10px; border-left:3px solid var(--border); transition:border-color 0.15s; }
+  .market-card.ok { border-left-color:var(--green); }
+  .market-card.warn { border-left-color:var(--yellow); }
+  .market-card:hover { border-color:var(--border2); }
 
-  .range-row { display: flex; align-items: center; gap: 10px; }
-  .range-row input[type=range] {
-    flex: 1;
-    -webkit-appearance: none;
-    height: 4px;
-    background: var(--border2);
-    border-radius: 2px;
-    outline: none;
-  }
-  .range-row input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    width: 16px;
-    height: 16px;
-    background: var(--green);
-    border-radius: 50%;
-    cursor: pointer;
-  }
-  .range-val { font-size: 13px; font-weight: 600; color: var(--green); min-width: 36px; text-align: right; }
+  .market-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:14px; }
+  .market-title { font-size:15px; font-weight:600; color:var(--text); line-height:1.4; }
+  .badge { flex-shrink:0; font-size:10px; font-weight:700; padding:3px 8px; border-radius:20px; text-transform:uppercase; letter-spacing:0.04em; }
+  .badge-ok { background:var(--green-bg); color:var(--green); border:1px solid rgba(0,255,136,0.2); }
+  .badge-warn { background:var(--yellow-bg); color:var(--yellow); border:1px solid rgba(240,165,0,0.2); }
 
-  .btn-generate {
-    width: 100%;
-    background: var(--green);
-    color: #0d1117;
-    border: none;
-    border-radius: var(--radius);
-    padding: 11px 20px;
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    transition: background 0.15s;
-  }
-  .btn-generate:hover { background: var(--green-dim); }
-  .btn-generate:active { transform: scale(0.98); }
-  .btn-generate svg { width: 16px; height: 16px; }
+  /* CAMPOS DO FORMULÁRIO */
+  .fields-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:10px; }
+  @media(max-width:520px){ .fields-grid{ grid-template-columns:1fr; } }
+  .field-block { background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:10px 12px; }
+  .field-label { font-size:10px; font-weight:600; color:var(--text3); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:4px; }
+  .field-value { font-size:13px; color:var(--text); line-height:1.4; }
+  .field-value.mono { font-family:monospace; font-size:12px; color:var(--blue); }
+  .field-block.full { grid-column:1/-1; }
 
-  /* STATS */
-  .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px; }
-  .stat-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 14px 16px;
-    text-align: center;
-  }
-  .stat-num { font-size: 24px; font-weight: 700; line-height: 1; margin-bottom: 4px; }
-  .stat-label { font-size: 11px; color: var(--text2); }
+  /* LMSR badge */
+  .lmsr-badge { display:inline-flex; align-items:center; gap:6px; }
+  .lmsr-num { font-size:20px; font-weight:700; color:var(--green); }
+  .lmsr-tip { font-size:11px; color:var(--text2); line-height:1.3; }
 
-  /* FILTROS */
-  .filter-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-  .filter-btn {
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    color: var(--text2);
-    font-size: 12px;
-    padding: 4px 14px;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .filter-btn:hover { border-color: var(--border2); color: var(--text); }
-  .filter-btn.active { background: var(--green-bg); border-color: rgba(0,255,136,0.3); color: var(--green); }
+  /* prob bar */
+  .prob-row { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+  .prob-bar { flex:1; height:3px; background:var(--border); border-radius:2px; overflow:hidden; }
+  .prob-fill { height:100%; border-radius:2px; }
+  .prob-label { font-size:12px; font-weight:600; min-width:60px; text-align:right; }
 
-  /* MARKET CARDS */
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-  }
+  /* auto-res box */
+  .autores-box { background:var(--blue-bg); border:1px solid rgba(88,166,255,0.2); border-radius:var(--radius); padding:10px 12px; margin-bottom:10px; }
+  .autores-label { font-size:10px; font-weight:600; color:var(--blue); text-transform:uppercase; letter-spacing:0.07em; margin-bottom:6px; display:flex; align-items:center; gap:5px; }
+  .autores-row { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+  @media(max-width:520px){ .autores-row{ grid-template-columns:1fr; } }
+  .autores-field label { font-size:11px; color:var(--text2); margin-bottom:3px; display:block; }
+  .autores-field .val { font-size:12px; color:var(--text); }
+  .autores-field .val.url { color:var(--blue); word-break:break-all; font-size:11px; }
 
-  .market-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 16px;
-    margin-bottom: 8px;
-    border-left: 3px solid var(--border);
-    transition: border-color 0.15s;
-  }
-  .market-card.ok { border-left-color: var(--green); }
-  .market-card.warn { border-left-color: var(--yellow); }
-  .market-card:hover { border-color: var(--border2); }
+  .card-actions { display:flex; gap:6px; margin-top:10px; flex-wrap:wrap; }
+  .btn-copy { background:transparent; border:1px solid var(--border); border-radius:var(--radius); color:var(--text2); font-size:12px; padding:5px 12px; cursor:pointer; display:flex; align-items:center; gap:5px; transition:all 0.15s; }
+  .btn-copy:hover { border-color:var(--border2); color:var(--text); background:var(--bg3); }
+  .btn-copy.copied { border-color:rgba(0,255,136,0.3); color:var(--green); }
 
-  .market-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
-  .market-title { font-size: 14px; font-weight: 500; color: var(--text); line-height: 1.4; }
+  .copy-all-bar { position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:var(--bg2); border:1px solid var(--border2); border-radius:30px; padding:10px 20px; display:none; align-items:center; gap:12px; box-shadow:0 8px 32px rgba(0,0,0,0.4); z-index:200; white-space:nowrap; }
+  .copy-all-bar.visible { display:flex; }
+  .btn-copy-all { background:var(--green); color:#0d1117; border:none; border-radius:20px; padding:7px 18px; font-size:13px; font-weight:700; cursor:pointer; display:flex; align-items:center; gap:6px; }
+  .btn-copy-all:hover { background:var(--green-dim); }
+  .copy-all-label { font-size:13px; color:var(--text2); }
 
-  .badge {
-    flex-shrink: 0;
-    font-size: 10px;
-    font-weight: 700;
-    padding: 3px 8px;
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-  .badge-ok { background: var(--green-bg); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
-  .badge-warn { background: var(--yellow-bg); color: var(--yellow); border: 1px solid rgba(240,165,0,0.2); }
+  .loading { text-align:center; padding:40px 20px; color:var(--text2); }
+  .spinner { display:inline-block; width:20px; height:20px; border:2px solid var(--border2); border-top-color:var(--green); border-radius:50%; animation:spin 0.7s linear infinite; vertical-align:middle; margin-right:8px; }
+  @keyframes spin { to{ transform:rotate(360deg); } }
 
-  .market-meta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 10px; }
-  .meta-item { font-size: 12px; color: var(--text2); display: flex; align-items: center; gap: 4px; }
-  .meta-item svg { width: 12px; height: 12px; opacity: 0.6; }
-  .meta-prob { font-weight: 600; }
-  .meta-prob.ok { color: var(--green); }
-  .meta-prob.warn { color: var(--yellow); }
-  .meta-prob.bad { color: var(--red); }
+  .game-group { margin-bottom:28px; }
+  .game-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; padding-bottom:8px; border-bottom:1px solid var(--border); }
+  .game-header-title { font-size:15px; font-weight:600; color:var(--text); }
+  .game-header-time { font-size:12px; color:var(--text2); }
+  .game-dot { width:6px; height:6px; background:var(--green); border-radius:50%; flex-shrink:0; }
 
-  .prob-bar { height: 3px; background: var(--border); border-radius: 2px; margin-bottom: 10px; overflow: hidden; }
-  .prob-fill { height: 100%; border-radius: 2px; transition: width 0.4s; }
-
-  .resolution-box {
-    background: var(--bg3);
-    border-radius: var(--radius);
-    padding: 10px 12px;
-    font-size: 12px;
-    color: var(--text2);
-    line-height: 1.5;
-    margin-bottom: 10px;
-  }
-
-  .card-actions { display: flex; gap: 6px; }
-  .btn-copy {
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    color: var(--text2);
-    font-size: 12px;
-    padding: 5px 12px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    transition: all 0.15s;
-  }
-  .btn-copy:hover { border-color: var(--border2); color: var(--text); background: var(--bg3); }
-  .btn-copy.copied { border-color: rgba(0,255,136,0.3); color: var(--green); }
-  .btn-copy svg { width: 12px; height: 12px; }
-
-  /* COPY ALL */
-  .copy-all-bar {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--bg2);
-    border: 1px solid var(--border2);
-    border-radius: 30px;
-    padding: 10px 20px;
-    display: none;
-    align-items: center;
-    gap: 12px;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
-    z-index: 200;
-  }
-  .copy-all-bar.visible { display: flex; }
-  .btn-copy-all {
-    background: var(--green);
-    color: #0d1117;
-    border: none;
-    border-radius: 20px;
-    padding: 7px 18px;
-    font-size: 13px;
-    font-weight: 700;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .btn-copy-all:hover { background: var(--green-dim); }
-  .copy-all-label { font-size: 13px; color: var(--text2); }
-
-  /* LOADING */
-  .loading { text-align: center; padding: 40px 20px; color: var(--text2); }
-  .spinner {
-    display: inline-block;
-    width: 20px; height: 20px;
-    border: 2px solid var(--border2);
-    border-top-color: var(--green);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    vertical-align: middle;
-    margin-right: 8px;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* GAME GROUP HEADER */
-  .game-group { margin-bottom: 24px; }
-  .game-header {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 10px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
-  .game-header-title { font-size: 15px; font-weight: 600; color: var(--text); }
-  .game-header-time { font-size: 12px; color: var(--text2); }
-  .game-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; flex-shrink: 0; }
-
-  /* EMPTY */
-  .empty { text-align: center; padding: 40px; color: var(--text2); }
-  .empty p { font-size: 14px; margin-top: 8px; }
-
-  /* FOOTER */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 20px 24px;
-    text-align: center;
-    font-size: 12px;
-    color: var(--text3);
-    margin-top: 40px;
-  }
-  footer a { color: var(--text2); text-decoration: none; }
-  footer a:hover { color: var(--green); }
+  .empty { text-align:center; padding:40px; color:var(--text2); }
+  footer { border-top:1px solid var(--border); padding:20px 24px; text-align:center; font-size:12px; color:var(--text3); margin-top:40px; }
+  footer a { color:var(--text2); text-decoration:none; }
+  footer a:hover { color:var(--green); }
 </style>
 </head>
 <body>
-
 <nav>
   <a class="nav-logo" href="https://flipcerto.net" target="_blank">
     <img src="https://flipcerto.net/logo.png" alt="FlipCerto" onerror="this.style.display='none'">
@@ -363,7 +138,7 @@
 <main>
   <div class="page-header">
     <h1>Gerador de mercados</h1>
-    <p>Cria automaticamente mercados de curto prazo para os próximos jogos da Copa 2026, filtrando duplicatas e mercados muito óbvios.</p>
+    <p>Gera automaticamente todos os campos prontos para cadastrar na FlipCerto, incluindo LMSR ideal e auto-resolução via FIFA.</p>
   </div>
 
   <div class="config-card">
@@ -377,7 +152,7 @@
         </div>
       </div>
       <div class="config-field">
-        <label>Prob. Sim máxima</label>
+        <label>Prob. Sim máxima permitida</label>
         <div class="range-row" style="margin-top:8px;">
           <input type="range" min="55" max="92" step="5" value="80" id="max-prob">
           <span class="range-val" id="prob-out">80%</span>
@@ -392,16 +167,16 @@
         </select>
       </div>
       <div class="config-field">
-        <label>Mostrar mercados</label>
-        <select id="filter-select" onchange="applyFilter(this.value)">
-          <option value="all">Todos</option>
-          <option value="ok">Prontos para criar</option>
-          <option value="warn">Muito óbvios</option>
+        <label>Verificação AI (após início da partida)</label>
+        <select id="verify-after">
+          <option value="120">2h (partida normal)</option>
+          <option value="135" selected>2h15 (com prorrogação)</option>
+          <option value="150">2h30 (com prorrogação + pênaltis)</option>
         </select>
       </div>
     </div>
     <button class="btn-generate" onclick="generateMarkets()">
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.5 2.5L8 1 2.5 2.5 1 8l1.5 5.5L8 15l5.5-1.5L15 8z"/><path d="M8 5v3l2 1"/></svg>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M13.5 2.5L8 1 2.5 2.5 1 8l1.5 5.5L8 15l5.5-1.5L15 8z"/><path d="M8 5v3l2 1"/></svg>
       Gerar mercados
     </button>
   </div>
@@ -412,7 +187,7 @@
 <div class="copy-all-bar" id="copy-all-bar">
   <span class="copy-all-label" id="copy-all-label">mercados prontos</span>
   <button class="btn-copy-all" onclick="copyAll()">
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><rect x="4" y="4" width="10" height="10" rx="1.5"/><path d="M2 10V2.5A.5.5 0 0 1 2.5 2H10"/></svg>
+    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><rect x="4" y="4" width="10" height="10" rx="1.5"/><path d="M2 10V2.5A.5.5 0 012.5 2H10"/></svg>
     Copiar todos prontos
   </button>
 </div>
@@ -423,182 +198,251 @@
 
 <script>
 const GAMES = [
-  { date:'2026-06-22', time:'14:00', home:'Argentina', away:'Áustria', hStr:92, aStr:58, group:'J', stars:['Messi'] },
-  { date:'2026-06-22', time:'17:00', home:'França', away:'Iraque', hStr:90, aStr:42, group:'I', stars:['Mbappé'] },
-  { date:'2026-06-22', time:'20:00', home:'Noruega', away:'Senegal', hStr:74, aStr:68, group:'I', stars:['Haaland'] },
-  { date:'2026-06-23', time:'14:00', home:'Portugal', away:'Uzbequistão', hStr:88, aStr:40, group:'K', stars:['C. Ronaldo'] },
-  { date:'2026-06-23', time:'17:00', home:'Inglaterra', away:'Gana', hStr:82, aStr:55, group:'L', stars:['Bellingham'] },
-  { date:'2026-06-23', time:'20:00', home:'Alemanha', away:'Camarões', hStr:85, aStr:52, group:'H', stars:['Müller'] },
-  { date:'2026-06-24', time:'14:00', home:'Espanha', away:'Tunísia', hStr:88, aStr:50, group:'E', stars:['Pedri'] },
-  { date:'2026-06-24', time:'19:00', home:'Escócia', away:'Brasil', hStr:60, aStr:91, group:'C', stars:['Vini Jr','Rodrygo'] },
-  { date:'2026-06-25', time:'14:00', home:'Japão', away:'Croácia', hStr:76, aStr:78, group:'F', stars:['Modric'] },
-  { date:'2026-06-25', time:'17:00', home:'Marrocos', away:'Bélgica', hStr:75, aStr:80, group:'G', stars:['De Bruyne'] },
-  { date:'2026-06-26', time:'14:00', home:'México', away:'Polônia', hStr:72, aStr:74, group:'B', stars:['Lewandowski'] },
-  { date:'2026-06-26', time:'17:00', home:'EUA', away:'Panamá', hStr:78, aStr:55, group:'A', stars:['Pulisic'] },
-  { date:'2026-06-27', time:'14:00', home:'Holanda', away:'Peru', hStr:85, aStr:56, group:'D', stars:['Depay'] },
-  { date:'2026-06-27', time:'17:00', home:'Suíça', away:'Camarões', hStr:78, aStr:52, group:'H', stars:[] },
-  { date:'2026-06-28', time:'14:00', home:'Coreia do Sul', away:'Gana', hStr:70, aStr:55, group:'L', stars:['Son'] },
+  { date:'2026-06-22', time:'14:00', home:'Argentina', away:'Áustria',     hStr:92, aStr:58, group:'J', stars:['Messi'] },
+  { date:'2026-06-22', time:'17:00', home:'França',    away:'Iraque',      hStr:90, aStr:42, group:'I', stars:['Mbappé'] },
+  { date:'2026-06-22', time:'20:00', home:'Noruega',   away:'Senegal',     hStr:74, aStr:68, group:'I', stars:['Haaland'] },
+  { date:'2026-06-23', time:'14:00', home:'Portugal',  away:'Uzbequistão', hStr:88, aStr:40, group:'K', stars:['C. Ronaldo'] },
+  { date:'2026-06-23', time:'17:00', home:'Inglaterra',away:'Gana',        hStr:82, aStr:55, group:'L', stars:['Bellingham'] },
+  { date:'2026-06-23', time:'20:00', home:'Alemanha',  away:'Camarões',    hStr:85, aStr:52, group:'H', stars:['Müller'] },
+  { date:'2026-06-24', time:'14:00', home:'Espanha',   away:'Tunísia',     hStr:88, aStr:50, group:'E', stars:['Pedri'] },
+  { date:'2026-06-24', time:'19:00', home:'Escócia',   away:'Brasil',      hStr:60, aStr:91, group:'C', stars:['Vini Jr','Rodrygo'] },
+  { date:'2026-06-25', time:'14:00', home:'Japão',     away:'Croácia',     hStr:76, aStr:78, group:'F', stars:['Modric'] },
+  { date:'2026-06-25', time:'17:00', home:'Marrocos',  away:'Bélgica',     hStr:75, aStr:80, group:'G', stars:['De Bruyne'] },
+  { date:'2026-06-26', time:'14:00', home:'México',    away:'Polônia',     hStr:72, aStr:74, group:'B', stars:['Lewandowski'] },
+  { date:'2026-06-26', time:'17:00', home:'EUA',       away:'Panamá',      hStr:78, aStr:55, group:'A', stars:['Pulisic'] },
+  { date:'2026-06-27', time:'14:00', home:'Holanda',   away:'Peru',        hStr:85, aStr:56, group:'D', stars:['Depay'] },
+  { date:'2026-06-27', time:'17:00', home:'Suíça',     away:'Camarões',    hStr:78, aStr:52, group:'H', stars:[] },
+  { date:'2026-06-28', time:'14:00', home:'Coreia do Sul', away:'Gana',    hStr:70, aStr:55, group:'L', stars:['Son'] },
 ];
 
 const EXISTING = [
-  'argentina vence austria',
-  'franca vence iraque',
-  'messi ira marcar 2 ou mais gols',
-  'mbappe ira marcar 2 ou mais gols',
-  'cristiano ronaldo marca 2 ou mais gols',
-  'brasil vai vencer a copa',
-  'holanda vai vencer a copa',
-  'alemanha vai vencer a copa',
-  'portugal vai vencer a copa',
-  'inglaterra vai vencer a copa',
-  'espanha vai vencer a copa',
-  'argentina vai vencer a copa',
-  'franca vai vencer a copa',
-  'uruguai vence cabo verde',
+  'argentina vence austria','franca vence iraque','messi ira marcar 2 ou mais gols',
+  'mbappe ira marcar 2 ou mais gols','cristiano ronaldo marca 2 ou mais gols',
+  'brasil vai vencer a copa','holanda vai vencer a copa','alemanha vai vencer a copa',
+  'portugal vai vencer a copa','inglaterra vai vencer a copa','espanha vai vencer a copa',
+  'argentina vai vencer a copa','franca vai vencer a copa','uruguai vence cabo verde',
 ];
 
-function norm(s) {
-  return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,'').trim();
-}
-function isDup(title) {
-  const n = norm(title);
-  return EXISTING.some(e => n.includes(e));
-}
-function prob(hStr, aStr, type) {
+function norm(s){ return s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9 ]/g,'').trim(); }
+function isDup(t){ const n=norm(t); return EXISTING.some(e=>n.includes(e)); }
+
+function calcProb(hStr, aStr, type){
   const d = hStr - aStr;
   const hw = Math.min(84, Math.max(30, 50 + d * 0.42));
-  if (type==='hw') return hw;
-  if (type==='hw2') return Math.round(hw * 0.58);
-  if (type==='hw3') return Math.round(hw * 0.33);
-  if (type==='draw') return Math.max(10, Math.round(28 - Math.abs(d)*0.18));
-  if (type==='away2') return Math.max(8, Math.round(38 - d*0.48));
-  if (type==='t4') return Math.max(10, Math.round(32 - Math.abs(d)*0.14));
-  if (type==='star2') return Math.max(10, Math.round(22 - d*0.08));
+  if(type==='hw2')   return Math.round(hw * 0.58);
+  if(type==='hw3')   return Math.round(hw * 0.33);
+  if(type==='draw')  return Math.max(10, Math.round(28 - Math.abs(d)*0.18));
+  if(type==='away2') return Math.max(8,  Math.round(38 - d*0.48));
+  if(type==='t4')    return Math.max(10, Math.round(32 - Math.abs(d)*0.14));
+  if(type==='star2') return Math.max(10, Math.round(22 - d*0.08));
   return 50;
 }
-function closeTime(date, time, mins) {
+
+// LMSR b ideal: mercados equilibrados precisam de mais liquidez
+// b baixo = menos subsídio da plataforma, mas mais slippage
+// regra: quanto mais óbvio o resultado, menor o b (menos subsídio desperdiçado)
+function calcLMSR(prob){
+  if(prob <= 45) return { b: 200, tip: 'Mercado equilibrado — b alto garante liquidez dos dois lados' };
+  if(prob <= 55) return { b: 150, tip: 'Levemente desbalanceado — b médio, bom custo-benefício' };
+  if(prob <= 65) return { b: 100, tip: 'Moderadamente desbalanceado — b padrão' };
+  if(prob <= 75) return { b: 75,  tip: 'Resultado mais provável — b reduzido, subsidia menos' };
+  return               { b: 50,  tip: 'Muito desbalanceado — b mínimo, reduz risco da plataforma' };
+}
+
+function addDT(date, time, extraMins){
   const [y,m,d] = date.split('-').map(Number);
-  const [h,mi] = time.split(':').map(Number);
-  const dt = new Date(y, m-1, d, h, mi - mins);
+  const [h,mi]  = time.split(':').map(Number);
+  const dt = new Date(y, m-1, d, h, mi + extraMins);
   const dd = String(dt.getDate()).padStart(2,'0');
   const mm = String(dt.getMonth()+1).padStart(2,'0');
   const hh = String(dt.getHours()).padStart(2,'0');
   const mn = String(dt.getMinutes()).padStart(2,'0');
-  return `${dd}/${mm} às ${hh}h${mn==='00'?'':mn}`;
+  return { fmt: `${dd}/${mm} às ${hh}h${mn==='00'?'':mn}`, iso: `${y}-${mm}-${dd}T${hh}:${mn}` };
 }
-function fmtDate(d) { const p=d.split('-'); return `${p[2]}/${p[1]}`; }
 
-function buildMarkets(g, maxP, closeMins) {
-  const dt = fmtDate(g.date);
-  const cl = closeTime(g.date, g.time, closeMins);
-  const res = `${dt} após apito final`;
+function fmtDate(d){ const p=d.split('-'); return `${p[2]}/${p[1]}`; }
+
+function buildMarkets(g, maxP, closeMins, verifyMins){
+  const dt  = fmtDate(g.date);
+  const cl  = addDT(g.date, g.time, -closeMins);
+  const vf  = addDT(g.date, g.time, verifyMins);
   const h=g.home, a=g.away;
-  const candidates = [
-    { title:`${h} x ${a} (${dt}) — ${h} vence por 2 ou mais gols na Copa 2026?`, ptype:'hw2',
-      rules:`Resolve SIM se ${h} vencer com 2+ gols de diferença no tempo regulamentar (90 min). Prorrogação não conta. Fonte: FIFA.` },
-    { title:`${h} x ${a} (${dt}) — ${h} vence por 3 ou mais gols na Copa 2026?`, ptype:'hw3',
-      rules:`Resolve SIM se ${h} vencer com 3+ gols de diferença nos 90 minutos. Prorrogação não conta. Fonte: FIFA.` },
-    { title:`${h} x ${a} (${dt}) — ${a} marca 2 ou mais gols na Copa 2026?`, ptype:'away2',
-      rules:`Resolve SIM se ${a} marcar 2 ou mais gols no tempo regulamentar. Fonte: FIFA/transmissão oficial.` },
-    { title:`${h} x ${a} (${dt}) — jogo termina empatado na Copa 2026?`, ptype:'draw',
-      rules:`Resolve SIM se o placar for igual após 90 minutos. Prorrogação não conta. Fonte: FIFA.` },
-    { title:`${h} x ${a} (${dt}) — jogo tem 4 ou mais gols na Copa 2026?`, ptype:'t4',
-      rules:`Resolve SIM se a soma dos gols das duas equipes for 4+ nos 90 minutos. Prorrogação não conta. Fonte: FIFA.` },
+  const FIFA_URL = `https://www.fifa.com/fifaplus/pt/match-centre/match/17/285/285`;
+
+  const types = [
+    { title:`${h} x ${a} (${dt}) — ${h} vence por 2 ou mais gols na Copa 2026?`,
+      ptype:'hw2', cat:'Esportes',
+      desc:`Mercado de curto prazo sobre o placar final de ${h} x ${a}, válido pelo Grupo ${g.group} da Copa do Mundo 2026. Resolve no apito final dos 90 minutos.`,
+      rules:`Resolve SIM se ${h} vencer com diferença de 2 ou mais gols no tempo regulamentar (90 min). Prorrogação não conta. Se o jogo for suspenso ou cancelado, o mercado é reembolsado. Fonte: FIFA / transmissão oficial.`,
+      aiPrompt:`Acesse a página e verifique o placar final de ${h} x ${a}. Resolva SIM se ${h} venceu com 2+ gols de diferença nos 90 minutos. Resolva NÃO caso contrário. Se o resultado ainda não estiver disponível, aguarde confirmação.` },
+    { title:`${h} x ${a} (${dt}) — ${h} vence por 3 ou mais gols na Copa 2026?`,
+      ptype:'hw3', cat:'Esportes',
+      desc:`Mercado de placar elástico em ${h} x ${a} pelo Grupo ${g.group} da Copa do Mundo 2026. Resolve no apito final dos 90 minutos.`,
+      rules:`Resolve SIM se ${h} vencer com diferença de 3 ou mais gols no tempo regulamentar (90 min). Prorrogação não conta. Se suspenso/cancelado, reembolso. Fonte: FIFA.`,
+      aiPrompt:`Verifique o placar final de ${h} x ${a}. Resolva SIM se ${h} venceu com 3+ gols de diferença nos 90 minutos. Resolva NÃO caso contrário.` },
+    { title:`${h} x ${a} (${dt}) — ${a} marca 2 ou mais gols na Copa 2026?`,
+      ptype:'away2', cat:'Esportes',
+      desc:`Mercado focado no desempenho ofensivo de ${a} na partida contra ${h}, Grupo ${g.group} da Copa 2026.`,
+      rules:`Resolve SIM se ${a} marcar 2 ou mais gols no tempo regulamentar (90 min). Gols em prorrogação não contam. Fonte: FIFA / transmissão oficial.`,
+      aiPrompt:`Verifique quantos gols ${a} marcou na partida contra ${h} nos 90 minutos regulamentares. Resolva SIM se foram 2 ou mais. Resolva NÃO caso contrário.` },
+    { title:`${h} x ${a} (${dt}) — jogo termina empatado na Copa 2026?`,
+      ptype:'draw', cat:'Esportes',
+      desc:`Mercado de resultado final da partida ${h} x ${a} pelo Grupo ${g.group} da Copa do Mundo 2026.`,
+      rules:`Resolve SIM se o placar for igual para ambas as equipes ao fim dos 90 minutos. Prorrogação não conta. Fonte: FIFA.`,
+      aiPrompt:`Verifique o placar final de ${h} x ${a} após 90 minutos. Resolva SIM se terminou empatado. Resolva NÃO se houve vencedor nos 90 minutos.` },
+    { title:`${h} x ${a} (${dt}) — jogo tem 4 ou mais gols na Copa 2026?`,
+      ptype:'t4', cat:'Esportes',
+      desc:`Mercado de total de gols na partida ${h} x ${a}, Grupo ${g.group} da Copa do Mundo 2026. Soma dos gols das duas equipes nos 90 minutos.`,
+      rules:`Resolve SIM se a soma dos gols de ambas as equipes for 4 ou mais nos 90 minutos. Prorrogação não conta. Fonte: FIFA.`,
+      aiPrompt:`Verifique o placar final de ${h} x ${a}. Some os gols das duas equipes nos 90 minutos regulamentares. Resolva SIM se o total for 4 ou mais. Resolva NÃO caso contrário.` },
   ];
+
   (g.stars||[]).forEach(star => {
-    candidates.push({
-      title:`${h} x ${a} (${dt}) — ${star} marca 2 ou mais gols na Copa 2026?`, ptype:'star2',
-      rules:`Resolve SIM se ${star} marcar 2+ gols no tempo regulamentar (90 min). Fonte: FIFA/transmissão oficial.`
+    types.push({
+      title:`${h} x ${a} (${dt}) — ${star} marca 2 ou mais gols na Copa 2026?`,
+      ptype:'star2', cat:'Esportes',
+      desc:`Mercado individual sobre ${star} na partida ${h} x ${a} pelo Grupo ${g.group} da Copa do Mundo 2026.`,
+      rules:`Resolve SIM se ${star} marcar 2 ou mais gols no tempo regulamentar (90 min). Gols em prorrogação não contam. Fonte: FIFA / transmissão oficial.`,
+      aiPrompt:`Verifique quantos gols ${star} marcou na partida ${h} x ${a} nos 90 minutos regulamentares. Resolva SIM se foram 2 ou mais. Resolva NÃO caso contrário.`
     });
   });
-  return candidates.map(m => {
-    const p = Math.round(prob(g.hStr, g.aStr, m.ptype));
+
+  return types.map(m => {
+    const p = calcProb(g.hStr, g.aStr, m.ptype);
     const dup = isDup(m.title);
     const status = dup ? 'skip' : (p > maxP ? 'warn' : 'ok');
-    return { ...m, p, status, cl, res };
+    const lmsr = calcLMSR(p);
+    return { ...m, p, status, cl: cl.fmt, vf: vf.fmt, vfISO: vf.iso, lmsr, fifaUrl: FIFA_URL };
   }).filter(m => m.status !== 'skip');
 }
 
 let allMarkets = [];
-let allGames = [];
+let allGames   = [];
 
-function generateMarkets() {
-  const daysAhead = +document.getElementById('days-ahead').value;
-  const maxP = +document.getElementById('max-prob').value;
-  const closeMins = +document.getElementById('close-before').value;
-  const out = document.getElementById('output');
-  const bar = document.getElementById('copy-all-bar');
+function generateMarkets(){
+  const daysAhead  = +document.getElementById('days-ahead').value;
+  const maxP       = +document.getElementById('max-prob').value;
+  const closeMins  = +document.getElementById('close-before').value;
+  const verifyMins = +document.getElementById('verify-after').value;
+  const out  = document.getElementById('output');
+  const bar  = document.getElementById('copy-all-bar');
 
   out.innerHTML = '<div class="loading"><span class="spinner"></span>Gerando mercados...</div>';
   bar.classList.remove('visible');
 
   setTimeout(() => {
-    const today = new Date('2026-06-22');
+    const today  = new Date('2026-06-22');
     const cutoff = new Date(today);
     cutoff.setDate(cutoff.getDate() + daysAhead);
 
-    allGames = [];
-    allMarkets = [];
-
+    allGames = []; allMarkets = [];
     GAMES.forEach(g => {
       const gd = new Date(g.date);
-      if (gd < today || gd > cutoff) return;
-      const markets = buildMarkets(g, maxP, closeMins);
-      if (markets.length) {
-        allGames.push({ game: g, markets });
-        allMarkets.push(...markets);
-      }
+      if(gd < today || gd > cutoff) return;
+      const markets = buildMarkets(g, maxP, closeMins, verifyMins);
+      if(markets.length){ allGames.push({game:g, markets}); allMarkets.push(...markets); }
     });
 
-    const ok = allMarkets.filter(m=>m.status==='ok').length;
+    const ok   = allMarkets.filter(m=>m.status==='ok').length;
     const warn = allMarkets.filter(m=>m.status==='warn').length;
 
     let html = `<div class="stats-row">
       <div class="stat-card"><div class="stat-num">${allMarkets.length}</div><div class="stat-label">mercados gerados</div></div>
       <div class="stat-card"><div class="stat-num" style="color:var(--green)">${ok}</div><div class="stat-label">prontos para criar</div></div>
       <div class="stat-card"><div class="stat-num" style="color:var(--yellow)">${warn}</div><div class="stat-label">muito óbvios</div></div>
-    </div>`;
-
-    html += `<div class="filter-row">
+    </div>
+    <div class="filter-row">
       <button class="filter-btn active" onclick="setFilter('all',this)">Todos (${allMarkets.length})</button>
       <button class="filter-btn" onclick="setFilter('ok',this)">Prontos (${ok})</button>
       <button class="filter-btn" onclick="setFilter('warn',this)">Óbvios (${warn})</button>
     </div>`;
 
     let mIdx = 0;
-    allGames.forEach(({ game: g, markets }) => {
+    allGames.forEach(({game:g, markets}) => {
       html += `<div class="game-group">
         <div class="game-header">
           <div class="game-dot"></div>
           <span class="game-header-title">${g.home} x ${g.away}</span>
           <span class="game-header-time">${fmtDate(g.date)} · ${g.time} · Grupo ${g.group}</span>
         </div>`;
+
       markets.forEach(m => {
-        const i = mIdx++;
-        const pc = m.p > 75 ? 'bad' : m.p > 60 ? 'warn' : 'ok';
-        const fill = m.p > 75 ? 'var(--red)' : m.p > 60 ? 'var(--yellow)' : 'var(--green)';
+        const i   = mIdx++;
+        const pc  = m.p > 75 ? 'var(--red)' : m.p > 60 ? 'var(--yellow)' : 'var(--green)';
+        const plabel = m.p > 75 ? `<span style="color:var(--red);font-weight:600">prob. Sim ≈ ${m.p}%</span>` :
+                       m.p > 60 ? `<span style="color:var(--yellow);font-weight:600">prob. Sim ≈ ${m.p}%</span>` :
+                                  `<span style="color:var(--green);font-weight:600">prob. Sim ≈ ${m.p}%</span>`;
+
         html += `<div class="market-card ${m.status}" data-status="${m.status}">
           <div class="market-header">
             <span class="market-title">${m.title}</span>
             <span class="badge ${m.status==='ok'?'badge-ok':'badge-warn'}">${m.status==='ok'?'criar':'óbvio'}</span>
           </div>
-          <div class="market-meta">
-            <span class="meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="12" height="12" rx="1"/><path d="M11 1v4M5 1v4M2 7h12"/></svg>
-              fecha: ${m.cl}
-            </span>
-            <span class="meta-item">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1.5"/></svg>
-              resolve: ${m.res}
-            </span>
-            <span class="meta-item meta-prob ${pc}">prob. Sim ≈ ${m.p}%</span>
+
+          <div class="prob-row">
+            <div class="prob-bar"><div class="prob-fill" style="width:${m.p}%;background:${pc}"></div></div>
+            ${plabel}
           </div>
-          <div class="prob-bar"><div class="prob-fill" style="width:${m.p}%;background:${fill}"></div></div>
-          <div class="resolution-box">${m.rules}</div>
+
+          <div class="fields-grid">
+            <div class="field-block">
+              <div class="field-label">Título (Question)</div>
+              <div class="field-value">${m.title}</div>
+            </div>
+            <div class="field-block">
+              <div class="field-label">Categoria</div>
+              <div class="field-value">Esportes</div>
+            </div>
+            <div class="field-block">
+              <div class="field-label">Mercado fecha em (Closes at)</div>
+              <div class="field-value">${m.cl}</div>
+            </div>
+            <div class="field-block">
+              <div class="field-label">LMSR liquidity b ideal</div>
+              <div class="field-value">
+                <div class="lmsr-badge">
+                  <span class="lmsr-num">${m.lmsr.b}</span>
+                  <span class="lmsr-tip">${m.lmsr.tip}</span>
+                </div>
+              </div>
+            </div>
+            <div class="field-block full">
+              <div class="field-label">Descrição</div>
+              <div class="field-value">${m.desc}</div>
+            </div>
+            <div class="field-block full">
+              <div class="field-label">Regras de resolução (Resolution rules)</div>
+              <div class="field-value">${m.rules}</div>
+            </div>
+          </div>
+
+          <div class="autores-box">
+            <div class="autores-label">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><circle cx="8" cy="8" r="6"/><path d="M8 5v3l2 1"/></svg>
+              Auto-resolução via IA (AI auto-resolution)
+            </div>
+            <div class="autores-row">
+              <div class="autores-field">
+                <label>Fonte de verificação (Source page)</label>
+                <div class="val url">${m.fifaUrl}</div>
+              </div>
+              <div class="autores-field">
+                <label>Horário de verificação (Verification time)</label>
+                <div class="val">${m.vf} <span style="color:var(--text3);font-size:11px">— após início + ${document.getElementById('verify-after').options[document.getElementById('verify-after').selectedIndex].text}</span></div>
+              </div>
+            </div>
+            <div style="margin-top:8px;">
+              <div class="autores-field">
+                <label>Instrução para a IA</label>
+                <div class="val" style="font-size:12px;color:var(--text2)">${m.aiPrompt}</div>
+              </div>
+            </div>
+          </div>
+
           <div class="card-actions">
             <button class="btn-copy" onclick="copyMarket(${i},this)">
-              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="4" width="10" height="10" rx="1.5"/><path d="M2 10V2.5A.5.5 0 012.5 2H10"/></svg>
-              Copiar
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="4" y="4" width="10" height="10" rx="1.5"/><path d="M2 10V2.5A.5.5 0 012.5 2H10"/></svg>
+              Copiar campos
             </button>
           </div>
         </div>`;
@@ -606,67 +450,84 @@ function generateMarkets() {
       html += '</div>';
     });
 
-    if (allMarkets.length === 0) {
-      html += '<div class="empty"><p>Nenhum mercado gerado para esse período.</p></div>';
-    }
-
+    if(!allMarkets.length) html += '<div class="empty"><p>Nenhum mercado gerado para esse período.</p></div>';
     out.innerHTML = html;
-
-    if (ok > 0) {
+    if(ok > 0){
       document.getElementById('copy-all-label').textContent = `${ok} mercados prontos`;
       bar.classList.add('visible');
     }
   }, 400);
 }
 
-function setFilter(type, btn) {
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-  document.querySelectorAll('.market-card').forEach(card => {
-    card.style.display = (type==='all' || card.dataset.status===type) ? '' : 'none';
-  });
-  document.querySelectorAll('.game-group').forEach(group => {
-    const visible = [...group.querySelectorAll('.market-card')].some(c => c.style.display !== 'none');
-    group.style.display = visible ? '' : 'none';
+function setFilter(type, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('.market-card').forEach(c=>{ c.style.display=(type==='all'||c.dataset.status===type)?'':'none'; });
+  document.querySelectorAll('.game-group').forEach(g=>{
+    const vis=[...g.querySelectorAll('.market-card')].some(c=>c.style.display!=='none');
+    g.style.display=vis?'':'none';
   });
 }
 
-function applyFilter(val) { setFilter(val, null); }
-
-function copyMarket(i, btn) {
+function copyMarket(i, btn){
   const m = allMarkets[i];
-  const text = `Título: ${m.title}
-Fecha: ${m.cl}
-Resolução: ${m.res}
-Outcomes: YES,NO
-Regras de resolução: ${m.rules}`;
-  navigator.clipboard.writeText(text).then(() => {
-    btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M2 8l4 4 8-8"/></svg> Copiado!`;
+  const verifyEl = document.getElementById('verify-after');
+  const verifyLabel = verifyEl.options[verifyEl.selectedIndex].text;
+  const text =
+`=== FLIPCERTO — NOVO MERCADO ===
+
+TÍTULO (Question):
+${m.title}
+
+CATEGORIA: Esportes
+
+FECHA EM (Closes at): ${m.cl}
+
+LMSR LIQUIDITY B: ${m.lmsr.b}
+→ ${m.lmsr.tip}
+
+DESCRIÇÃO:
+${m.desc}
+
+REGRAS DE RESOLUÇÃO:
+${m.rules}
+
+AUTO-RESOLUÇÃO (AI auto-resolution):
+  Source page: ${m.fifaUrl}
+  Verification time: ${m.vf} (após início + ${verifyLabel})
+  Instrução IA: ${m.aiPrompt}`;
+
+  navigator.clipboard.writeText(text).then(()=>{
+    btn.innerHTML=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><path d="M2 8l4 4 8-8"/></svg> Copiado!`;
     btn.classList.add('copied');
-    setTimeout(() => {
-      btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="4" y="4" width="10" height="10" rx="1.5"/><path d="M2 10V2.5A.5.5 0 012.5 2H10"/></svg> Copiar`;
-      btn.classList.remove('copied');
-    }, 2000);
+    setTimeout(()=>{ btn.innerHTML=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><rect x="4" y="4" width="10" height="10" rx="1.5"/><path d="M2 10V2.5A.5.5 0 012.5 2H10"/></svg> Copiar campos`; btn.classList.remove('copied'); },2000);
   });
 }
 
-function copyAll() {
-  const ok = allMarkets.filter(m => m.status==='ok');
-  const text = ok.map((m,i) => `=== Mercado ${i+1} ===
-Título: ${m.title}
-Fecha: ${m.cl}
-Resolução: ${m.res}
-Outcomes: YES,NO
-Regras: ${m.rules}`).join('\n\n');
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.querySelector('.btn-copy-all');
-    btn.textContent = 'Copiados!';
-    setTimeout(() => { btn.innerHTML = `<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><rect x="4" y="4" width="10" height="10" rx="1.5"/><path d="M2 10V2.5A.5.5 0 012.5 2H10"/></svg> Copiar todos prontos`; }, 2500);
+function copyAll(){
+  const verifyEl = document.getElementById('verify-after');
+  const verifyLabel = verifyEl.options[verifyEl.selectedIndex].text;
+  const ok = allMarkets.filter(m=>m.status==='ok');
+  const text = ok.map((m,i)=>
+`=== MERCADO ${i+1} ===
+TÍTULO: ${m.title}
+CATEGORIA: Esportes
+FECHA EM: ${m.cl}
+LMSR B: ${m.lmsr.b} (${m.lmsr.tip})
+DESCRIÇÃO: ${m.desc}
+REGRAS: ${m.rules}
+AUTO-RES SOURCE: ${m.fifaUrl}
+AUTO-RES VERIFICAÇÃO: ${m.vf} (+${verifyLabel})
+AUTO-RES IA: ${m.aiPrompt}`).join('\n\n');
+  navigator.clipboard.writeText(text).then(()=>{
+    const btn=document.querySelector('.btn-copy-all');
+    btn.textContent='Copiados!';
+    setTimeout(()=>{ btn.innerHTML=`<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" width="13" height="13"><rect x="4" y="4" width="10" height="10" rx="1.5"/><path d="M2 10V2.5A.5.5 0 012.5 2H10"/></svg> Copiar todos prontos`; },2500);
   });
 }
 
 document.getElementById('days-ahead').oninput = e => document.getElementById('days-out').textContent = e.target.value;
-document.getElementById('max-prob').oninput = e => document.getElementById('prob-out').textContent = e.target.value + '%';
+document.getElementById('max-prob').oninput   = e => document.getElementById('prob-out').textContent = e.target.value + '%';
 
 generateMarkets();
 </script>
