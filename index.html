@@ -181,7 +181,11 @@
     </button>
   </div>
 
-  <div id="output"></div>
+  <div id="output">
+    <div class="empty">
+      <p>Ajuste a configuração e clique em “Gerar mercados”.</p>
+    </div>
+  </div>
 </main>
 
 <div class="copy-all-bar" id="copy-all-bar">
@@ -198,21 +202,35 @@
 
 <script>
 const GAMES = [
-  { date:'2026-06-22', time:'14:00', home:'Argentina', away:'Áustria',     hStr:92, aStr:58, group:'J', stars:['Messi'] },
-  { date:'2026-06-22', time:'17:00', home:'França',    away:'Iraque',      hStr:90, aStr:42, group:'I', stars:['Mbappé'] },
-  { date:'2026-06-22', time:'20:00', home:'Noruega',   away:'Senegal',     hStr:74, aStr:68, group:'I', stars:['Haaland'] },
-  { date:'2026-06-23', time:'14:00', home:'Portugal',  away:'Uzbequistão', hStr:88, aStr:40, group:'K', stars:['C. Ronaldo'] },
-  { date:'2026-06-23', time:'17:00', home:'Inglaterra',away:'Gana',        hStr:82, aStr:55, group:'L', stars:['Bellingham'] },
-  { date:'2026-06-23', time:'20:00', home:'Alemanha',  away:'Camarões',    hStr:85, aStr:52, group:'H', stars:['Müller'] },
-  { date:'2026-06-24', time:'14:00', home:'Espanha',   away:'Tunísia',     hStr:88, aStr:50, group:'E', stars:['Pedri'] },
-  { date:'2026-06-24', time:'19:00', home:'Escócia',   away:'Brasil',      hStr:60, aStr:91, group:'C', stars:['Vini Jr','Rodrygo'] },
-  { date:'2026-06-25', time:'14:00', home:'Japão',     away:'Croácia',     hStr:76, aStr:78, group:'F', stars:['Modric'] },
-  { date:'2026-06-25', time:'17:00', home:'Marrocos',  away:'Bélgica',     hStr:75, aStr:80, group:'G', stars:['De Bruyne'] },
-  { date:'2026-06-26', time:'14:00', home:'México',    away:'Polônia',     hStr:72, aStr:74, group:'B', stars:['Lewandowski'] },
-  { date:'2026-06-26', time:'17:00', home:'EUA',       away:'Panamá',      hStr:78, aStr:55, group:'A', stars:['Pulisic'] },
-  { date:'2026-06-27', time:'14:00', home:'Holanda',   away:'Peru',        hStr:85, aStr:56, group:'D', stars:['Depay'] },
-  { date:'2026-06-27', time:'17:00', home:'Suíça',     away:'Camarões',    hStr:78, aStr:52, group:'H', stars:[] },
-  { date:'2026-06-28', time:'14:00', home:'Coreia do Sul', away:'Gana',    hStr:70, aStr:55, group:'L', stars:['Son'] },
+  { date:'2026-06-23', time:'14:00', home:'Jordânia', away:'Argélia', hStr:48, aStr:69, group:'J', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021499' },
+  { date:'2026-06-23', time:'14:00', home:'Portugal', away:'Uzbequistão', hStr:88, aStr:62, group:'K', stars:['C. Ronaldo'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021503' },
+  { date:'2026-06-23', time:'17:00', home:'Inglaterra', away:'Gana', hStr:86, aStr:68, group:'L', stars:['Bellingham'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021506' },
+  { date:'2026-06-23', time:'20:00', home:'Panamá', away:'Croácia', hStr:58, aStr:82, group:'L', stars:['Modric'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021511' },
+  { date:'2026-06-23', time:'23:00', home:'Colômbia', away:'RD do Congo', hStr:82, aStr:59, group:'K', stars:['Luis Díaz'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021501' },
+  { date:'2026-06-24', time:'16:00', home:'Suíça', away:'Canadá', hStr:78, aStr:76, group:'B', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021451' },
+  { date:'2026-06-24', time:'16:00', home:'Bósnia e Herzegovina', away:'Catar', hStr:70, aStr:63, group:'B', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021448' },
+  { date:'2026-06-24', time:'19:00', home:'Escócia', away:'Brasil', hStr:69, aStr:91, group:'C', stars:['Vini Jr','Rodrygo'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021455' },
+  { date:'2026-06-24', time:'19:00', home:'Marrocos', away:'Haiti', hStr:81, aStr:48, group:'C', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021452' },
+  { date:'2026-06-24', time:'22:00', home:'Tchéquia', away:'México', hStr:74, aStr:79, group:'A', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021444' },
+  { date:'2026-06-24', time:'22:00', home:'África do Sul', away:'República da Coreia', hStr:66, aStr:75, group:'A', stars:['Son'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021445' },
+  { date:'2026-06-25', time:'17:00', home:'Curaçau', away:'Costa do Marfim', hStr:47, aStr:76, group:'E', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021468' },
+  { date:'2026-06-25', time:'17:00', home:'Equador', away:'Alemanha', hStr:78, aStr:88, group:'E', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021466' },
+  { date:'2026-06-25', time:'20:00', home:'Japão', away:'Suécia', hStr:77, aStr:79, group:'F', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021471' },
+  { date:'2026-06-25', time:'20:00', home:'Tunísia', away:'Holanda', hStr:65, aStr:86, group:'F', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021473' },
+  { date:'2026-06-25', time:'23:00', home:'Turquia', away:'EUA', hStr:73, aStr:78, group:'D', stars:['Pulisic'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021459' },
+  { date:'2026-06-25', time:'23:00', home:'Paraguai', away:'Austrália', hStr:72, aStr:74, group:'D', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021461' },
+  { date:'2026-06-26', time:'16:00', home:'Noruega', away:'França', hStr:81, aStr:90, group:'I', stars:['Haaland','Mbappé'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021489' },
+  { date:'2026-06-26', time:'16:00', home:'Senegal', away:'Iraque', hStr:78, aStr:55, group:'I', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021493' },
+  { date:'2026-06-26', time:'21:00', home:'Cabo Verde', away:'Arábia Saudita', hStr:58, aStr:68, group:'H', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021485' },
+  { date:'2026-06-26', time:'21:00', home:'Uruguai', away:'Espanha', hStr:84, aStr:89, group:'H', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021484' },
+  { date:'2026-06-27', time:'00:00', home:'Egito', away:'RI do Irã', hStr:73, aStr:71, group:'G', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021479' },
+  { date:'2026-06-27', time:'00:00', home:'Nova Zelândia', away:'Bélgica', hStr:54, aStr:84, group:'G', stars:['De Bruyne'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021481' },
+  { date:'2026-06-27', time:'18:00', home:'Panamá', away:'Inglaterra', hStr:58, aStr:86, group:'L', stars:['Bellingham'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021508' },
+  { date:'2026-06-27', time:'18:00', home:'Croácia', away:'Gana', hStr:82, aStr:68, group:'L', stars:['Modric'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021509' },
+  { date:'2026-06-27', time:'20:30', home:'Colômbia', away:'Portugal', hStr:82, aStr:88, group:'K', stars:['Luis Díaz','C. Ronaldo'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021505' },
+  { date:'2026-06-27', time:'20:30', home:'RD do Congo', away:'Uzbequistão', hStr:59, aStr:62, group:'K', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021500' },
+  { date:'2026-06-27', time:'23:00', home:'Argélia', away:'Áustria', hStr:69, aStr:77, group:'J', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021497' },
+  { date:'2026-06-27', time:'23:00', home:'Jordânia', away:'Argentina', hStr:48, aStr:92, group:'J', stars:['Messi'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021495' },
 ];
 
 const EXISTING = [
@@ -262,13 +280,17 @@ function addDT(date, time, extraMins){
 
 function fmtDate(d){ const p=d.split('-'); return `${p[2]}/${p[1]}`; }
 
+function gameDateTime(g){
+  const [y,m,d] = g.date.split('-').map(Number);
+  const [h,mi] = g.time.split(':').map(Number);
+  return new Date(y, m-1, d, h, mi);
+}
+
 function buildMarkets(g, maxP, closeMins, verifyMins){
   const dt  = fmtDate(g.date);
   const cl  = addDT(g.date, g.time, -closeMins);
   const vf  = addDT(g.date, g.time, verifyMins);
   const h=g.home, a=g.away;
-  const FIFA_URL = `https://www.fifa.com/fifaplus/pt/match-centre/match/17/285/285`;
-
   const types = [
     { title:`${h} x ${a} (${dt}) — ${h} vence por 2 ou mais gols na Copa 2026?`,
       ptype:'hw2', cat:'Esportes',
@@ -312,7 +334,7 @@ function buildMarkets(g, maxP, closeMins, verifyMins){
     const dup = isDup(m.title);
     const status = dup ? 'skip' : (p > maxP ? 'warn' : 'ok');
     const lmsr = calcLMSR(p);
-    return { ...m, p, status, cl: cl.fmt, vf: vf.fmt, vfISO: vf.iso, lmsr, fifaUrl: FIFA_URL };
+    return { ...m, p, status, cl: cl.fmt, vf: vf.fmt, vfISO: vf.iso, lmsr, fifaUrl: g.fifaUrl };
   }).filter(m => m.status !== 'skip');
 }
 
@@ -331,14 +353,15 @@ function generateMarkets(){
   bar.classList.remove('visible');
 
   setTimeout(() => {
-    const today  = new Date('2026-06-22');
-    const cutoff = new Date(today);
+    const now = new Date();
+    const cutoff = new Date(now);
     cutoff.setDate(cutoff.getDate() + daysAhead);
+    cutoff.setHours(23, 59, 59, 999);
 
     allGames = []; allMarkets = [];
     GAMES.forEach(g => {
-      const gd = new Date(g.date);
-      if(gd < today || gd > cutoff) return;
+      const kickoff = gameDateTime(g);
+      if(kickoff <= now || kickoff > cutoff) return;
       const markets = buildMarkets(g, maxP, closeMins, verifyMins);
       if(markets.length){ allGames.push({game:g, markets}); allMarkets.push(...markets); }
     });
@@ -528,8 +551,6 @@ AUTO-RES IA: ${m.aiPrompt}`).join('\n\n');
 
 document.getElementById('days-ahead').oninput = e => document.getElementById('days-out').textContent = e.target.value;
 document.getElementById('max-prob').oninput   = e => document.getElementById('prob-out').textContent = e.target.value + '%';
-
-generateMarkets();
 </script>
 </body>
 </html>
