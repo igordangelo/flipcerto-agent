@@ -1,0 +1,11 @@
+{
+  "name": "flipcerto-agent",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "refresh": "node scripts/refresh-data.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.53.1"
+  }
+}

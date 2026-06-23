@@ -67,6 +67,10 @@
   .analysis-reason { margin-top:8px; padding-top:8px; border-top:1px solid rgba(0,255,136,0.12); font-size:12px; color:var(--text2); }
   .game-audit { margin:-2px 0 12px 16px; color:var(--text3); font-size:11px; }
   .model-note { background:var(--yellow-bg); border:1px solid rgba(240,165,0,.18); color:var(--text2); border-radius:var(--radius); padding:10px 12px; margin-bottom:16px; font-size:12px; }
+  .data-status { display:flex; align-items:center; justify-content:space-between; gap:12px; background:var(--bg3); border:1px solid var(--border); border-radius:var(--radius); padding:9px 11px; margin-bottom:16px; font-size:11px; color:var(--text2); }
+  .data-status strong { color:var(--text); font-weight:600; }
+  .status-dot { width:7px; height:7px; border-radius:50%; background:var(--yellow); display:inline-block; margin-right:6px; }
+  .status-dot.live { background:var(--green); }
 
   .market-header { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:14px; }
   .market-title { font-size:15px; font-weight:600; color:var(--text); line-height:1.4; }
@@ -151,6 +155,10 @@
 
   <div class="config-card">
     <p class="config-title">Configuração</p>
+    <div class="data-status" id="data-status">
+      <span><span class="status-dot"></span><strong>Carregando inteligência...</strong></span>
+      <span>fallback local disponível</span>
+    </div>
     <div class="config-grid">
       <div class="config-field">
         <label>Dias à frente</label>
@@ -217,7 +225,7 @@
 </footer>
 
 <script>
-const GAMES = [
+let GAMES = [
   { date:'2026-06-23', time:'14:00', home:'Jordânia', away:'Argélia', hStr:48, aStr:69, group:'J', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021499' },
   { date:'2026-06-23', time:'14:00', home:'Portugal', away:'Uzbequistão', hStr:88, aStr:62, group:'K', stars:['C. Ronaldo'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021503' },
   { date:'2026-06-23', time:'17:00', home:'Inglaterra', away:'Gana', hStr:86, aStr:68, group:'L', stars:['Bellingham'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021506' },
@@ -248,6 +256,7 @@ const GAMES = [
   { date:'2026-06-27', time:'23:00', home:'Argélia', away:'Áustria', hStr:69, aStr:77, group:'J', stars:[], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021497' },
   { date:'2026-06-27', time:'23:00', home:'Jordânia', away:'Argentina', hStr:48, aStr:92, group:'J', stars:['Messi'], fifaUrl:'https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021495' },
 ];
+let INTELLIGENCE_META = null;
 
 const EXISTING = [
   'argentina vence austria','franca vence iraque','messi ira marcar 2 ou mais gols',
@@ -273,6 +282,18 @@ function poissonDistribution(lambda, maxGoals=10){
 // Modelo-base sem odds externas: transforma a diferença de força em gols esperados
 // e usa Poisson para comparar várias linhas antes de sugerir um mercado.
 function analyzeGame(g){
+  if(g.intelligence?.homeXg != null && g.intelligence?.awayXg != null){
+    return {
+      homeXg:g.intelligence.homeXg,
+      awayXg:g.intelligence.awayXg,
+      homeDist:poissonDistribution(g.intelligence.homeXg),
+      awayDist:poissonDistribution(g.intelligence.awayXg),
+      confidence:g.intelligence.confidence ?? 58,
+      confidenceLabel:g.intelligence.confidenceLabel || 'média',
+      basis:g.intelligence.basis || 'Poisson + força relativa',
+      caveat:g.intelligence.caveat || ''
+    };
+  }
   const diff = g.hStr - g.aStr;
   const totalGoals = clamp(2.55 + Math.abs(diff) * 0.012, 2.35, 3.25);
   const homeShare = 1 / (1 + Math.exp(-diff / 18));
@@ -668,6 +689,25 @@ AUTO-RES IA: ${m.aiPrompt}`).join('\n\n');
 
 document.getElementById('days-ahead').oninput = e => document.getElementById('days-out').textContent = e.target.value;
 document.getElementById('max-prob').oninput   = e => document.getElementById('prob-out').textContent = e.target.value + '%';
+
+async function loadIntelligence(){
+  const status = document.getElementById('data-status');
+  try {
+    const response = await fetch(`data/intelligence.json?v=${Date.now()}`, { cache:'no-store' });
+    if(!response.ok) throw new Error(`HTTP ${response.status}`);
+    const data = await response.json();
+    if(!Array.isArray(data.games) || !data.games.length) throw new Error('arquivo sem partidas');
+    GAMES = data.games;
+    INTELLIGENCE_META = data;
+    const updated = new Date(data.generatedAt).toLocaleString('pt-BR', { timeZone:data.timezone || 'America/Sao_Paulo' });
+    const oddsLive = data.sources?.odds?.status === 'ok';
+    status.innerHTML = `<span><span class="status-dot live"></span><strong>${GAMES.length} partidas atualizadas</strong></span><span>${oddsLive?'odds conectadas':'modelo sem odds'} · ${updated}</span>`;
+  } catch(error) {
+    status.innerHTML = `<span><span class="status-dot"></span><strong>Usando fallback local</strong></span><span>${error.message}</span>`;
+  }
+}
+
+loadIntelligence();
 </script>
 </body>
 </html>

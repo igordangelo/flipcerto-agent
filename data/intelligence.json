@@ -1,0 +1,584 @@
+{
+  "generatedAt": "2026-06-23T22:08:12.606Z",
+  "timezone": "America/Sao_Paulo",
+  "sources": {
+    "fifa": {
+      "status": "ok",
+      "url": "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures?country=BR&wtw-filter=ALL"
+    },
+    "odds": {
+      "status": "not-configured",
+      "provider": "The Odds API",
+      "sportKey": null
+    }
+  },
+  "games": [
+    {
+      "date": "2026-06-23",
+      "time": "20:00",
+      "home": "Panamá",
+      "away": "Croácia",
+      "group": "L",
+      "phase": "Primeira fase",
+      "hStr": 58,
+      "aStr": 82,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021511",
+      "intelligence": {
+        "homeXg": 0.5920310005513156,
+        "awayXg": 2.2459689994486847,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-23",
+      "time": "23:00",
+      "home": "Colômbia",
+      "away": "RD do Congo",
+      "group": "K",
+      "phase": "Primeira fase",
+      "hStr": 82,
+      "aStr": 59,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021501",
+      "intelligence": {
+        "homeXg": 2.2101334022813597,
+        "awayXg": 0.6158665977186397,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "time": "16:00",
+      "home": "Suíça",
+      "away": "Canadá",
+      "group": "B",
+      "phase": "Primeira fase",
+      "hStr": 78,
+      "aStr": 76,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021451",
+      "intelligence": {
+        "homeXg": 1.358426531030317,
+        "awayXg": 1.2155734689696829,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "time": "16:00",
+      "home": "Bósnia e Herzegovina",
+      "away": "Catar",
+      "group": "B",
+      "phase": "Primeira fase",
+      "hStr": 70,
+      "aStr": 63,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021448",
+      "intelligence": {
+        "homeXg": 1.569904019222045,
+        "awayXg": 1.0640959807779549,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "time": "19:00",
+      "home": "Escócia",
+      "away": "Brasil",
+      "group": "C",
+      "phase": "Primeira fase",
+      "hStr": 69,
+      "aStr": 91,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021455",
+      "intelligence": {
+        "homeXg": 0.6403133667805847,
+        "awayXg": 2.173686633219415,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "time": "19:00",
+      "home": "Marrocos",
+      "away": "Haiti",
+      "group": "C",
+      "phase": "Primeira fase",
+      "hStr": 81,
+      "aStr": 48,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021452",
+      "intelligence": {
+        "homeXg": 2.539918478581299,
+        "awayXg": 0.4060815214187004,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "time": "22:00",
+      "home": "Tchéquia",
+      "away": "México",
+      "group": "A",
+      "phase": "Primeira fase",
+      "hStr": 74,
+      "aStr": 79,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021444",
+      "intelligence": {
+        "homeXg": 1.1249065219970225,
+        "awayXg": 1.4850934780029774,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-24",
+      "time": "22:00",
+      "home": "África do Sul",
+      "away": "República da Coreia",
+      "group": "A",
+      "phase": "Primeira fase",
+      "hStr": 66,
+      "aStr": 75,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021445",
+      "intelligence": {
+        "homeXg": 1.0035030976654704,
+        "awayXg": 1.6544969023345295,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "time": "17:00",
+      "home": "Curaçau",
+      "away": "Costa do Marfim",
+      "group": "E",
+      "phase": "Primeira fase",
+      "hStr": 47,
+      "aStr": 76,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021468",
+      "intelligence": {
+        "homeXg": 0.48232691309224174,
+        "awayXg": 2.415673086907758,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "time": "17:00",
+      "home": "Equador",
+      "away": "Alemanha",
+      "group": "E",
+      "phase": "Primeira fase",
+      "hStr": 78,
+      "aStr": 88,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021466",
+      "intelligence": {
+        "homeXg": 0.9734190967801769,
+        "awayXg": 1.696580903219823,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "time": "20:00",
+      "home": "Japão",
+      "away": "Suécia",
+      "group": "F",
+      "phase": "Primeira fase",
+      "hStr": 77,
+      "aStr": 79,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021471",
+      "intelligence": {
+        "homeXg": 1.215573468969683,
+        "awayXg": 1.358426531030317,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "time": "20:00",
+      "home": "Tunísia",
+      "away": "Holanda",
+      "group": "F",
+      "phase": "Primeira fase",
+      "hStr": 65,
+      "aStr": 86,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021473",
+      "intelligence": {
+        "homeXg": 0.6653573954196147,
+        "awayXg": 2.136642604580385,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "time": "23:00",
+      "home": "Turquia",
+      "away": "EUA",
+      "group": "D",
+      "phase": "Primeira fase",
+      "hStr": 73,
+      "aStr": 78,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021459",
+      "intelligence": {
+        "homeXg": 1.1249065219970225,
+        "awayXg": 1.4850934780029774,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-25",
+      "time": "23:00",
+      "home": "Paraguai",
+      "away": "Austrália",
+      "group": "D",
+      "phase": "Primeira fase",
+      "hStr": 72,
+      "aStr": 74,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021461",
+      "intelligence": {
+        "homeXg": 1.215573468969683,
+        "awayXg": 1.358426531030317,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "time": "16:00",
+      "home": "Noruega",
+      "away": "França",
+      "group": "I",
+      "phase": "Primeira fase",
+      "hStr": 81,
+      "aStr": 90,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021489",
+      "intelligence": {
+        "homeXg": 1.0035030976654704,
+        "awayXg": 1.6544969023345295,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "time": "16:00",
+      "home": "Senegal",
+      "away": "Iraque",
+      "group": "I",
+      "phase": "Primeira fase",
+      "hStr": 78,
+      "aStr": 55,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021493",
+      "intelligence": {
+        "homeXg": 2.2101334022813597,
+        "awayXg": 0.6158665977186397,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "time": "21:00",
+      "home": "Cabo Verde",
+      "away": "Arábia Saudita",
+      "group": "H",
+      "phase": "Primeira fase",
+      "hStr": 58,
+      "aStr": 68,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021485",
+      "intelligence": {
+        "homeXg": 0.9734190967801769,
+        "awayXg": 1.696580903219823,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-26",
+      "time": "21:00",
+      "home": "Uruguai",
+      "away": "Espanha",
+      "group": "H",
+      "phase": "Primeira fase",
+      "hStr": 84,
+      "aStr": 89,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021484",
+      "intelligence": {
+        "homeXg": 1.1249065219970225,
+        "awayXg": 1.4850934780029774,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "time": "00:00",
+      "home": "Egito",
+      "away": "RI do Irã",
+      "group": "G",
+      "phase": "Primeira fase",
+      "hStr": 73,
+      "aStr": 71,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021479",
+      "intelligence": {
+        "homeXg": 1.358426531030317,
+        "awayXg": 1.2155734689696829,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "time": "00:00",
+      "home": "Nova Zelândia",
+      "away": "Bélgica",
+      "group": "G",
+      "phase": "Primeira fase",
+      "hStr": 54,
+      "aStr": 84,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021481",
+      "intelligence": {
+        "homeXg": 0.4623090952034631,
+        "awayXg": 2.4476909047965365,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "time": "18:00",
+      "home": "Panamá",
+      "away": "Inglaterra",
+      "group": "L",
+      "phase": "Primeira fase",
+      "hStr": 58,
+      "aStr": 86,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021508",
+      "intelligence": {
+        "homeXg": 0.5029874369213976,
+        "awayXg": 2.3830125630786023,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "time": "18:00",
+      "home": "Croácia",
+      "away": "Gana",
+      "group": "L",
+      "phase": "Primeira fase",
+      "hStr": 82,
+      "aStr": 68,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021509",
+      "intelligence": {
+        "homeXg": 1.8623762545763278,
+        "awayXg": 0.855623745423672,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "time": "20:30",
+      "home": "Colômbia",
+      "away": "Portugal",
+      "group": "K",
+      "phase": "Primeira fase",
+      "hStr": 82,
+      "aStr": 88,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021505",
+      "intelligence": {
+        "homeXg": 1.0945009186558108,
+        "awayXg": 1.527499081344189,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "time": "20:30",
+      "home": "RD do Congo",
+      "away": "Uzbequistão",
+      "group": "K",
+      "phase": "Primeira fase",
+      "hStr": 59,
+      "aStr": 62,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021500",
+      "intelligence": {
+        "homeXg": 1.1854987304013556,
+        "awayXg": 1.400501269598644,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "time": "23:00",
+      "home": "Argélia",
+      "away": "Áustria",
+      "group": "J",
+      "phase": "Primeira fase",
+      "hStr": 69,
+      "aStr": 77,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021497",
+      "intelligence": {
+        "homeXg": 1.0337457842819384,
+        "awayXg": 1.6122542157180615,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-06-27",
+      "time": "23:00",
+      "home": "Jordânia",
+      "away": "Argentina",
+      "group": "J",
+      "phase": "Primeira fase",
+      "hStr": 48,
+      "aStr": 92,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021495",
+      "intelligence": {
+        "homeXg": 0.2457652696397826,
+        "awayXg": 2.8322347303602173,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-18",
+      "time": "18:00",
+      "home": "RU101",
+      "away": "RU102",
+      "group": "Decisão do 3º lugar",
+      "phase": "Decisão do 3º lugar",
+      "hStr": 70,
+      "aStr": 70,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289291/400021542",
+      "intelligence": {
+        "homeXg": 1.275,
+        "awayXg": 1.275,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    }
+  ]
+}

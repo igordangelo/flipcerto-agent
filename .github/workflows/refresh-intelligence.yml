@@ -1,0 +1,66 @@
+name: Refresh market intelligence
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "17 */4 * * *"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: refresh-market-intelligence
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - run: npm install
+      - run: npx playwright install --with-deps chromium
+
+      - name: Refresh fixtures, odds and model inputs
+        run: npm run refresh
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+
+      - name: Commit refreshed intelligence
+        run: |
+          if git diff --quiet -- data/intelligence.json; then
+            echo "No intelligence changes"
+            exit 0
+          fi
+          git config user.name "flipcerto-agent[bot]"
+          git config user.email "flipcerto-agent[bot]@users.noreply.github.com"
+          git add data/intelligence.json
+          git commit -m "Atualiza inteligência de mercados"
+          git push
+
+      - name: Prepare GitHub Pages artifact
+        run: |
+          mkdir -p _site/data
+          cp index.html _site/index.html
+          cp data/intelligence.json _site/data/intelligence.json
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy refreshed site
+        id: deployment
+        uses: actions/deploy-pages@v4
