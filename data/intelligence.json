@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-24T18:14:08.296Z",
+  "generatedAt": "2026-06-24T21:50:24.195Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,48 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-06-24",
-      "time": "16:00",
-      "home": "Suíça",
-      "away": "Canadá",
-      "group": "B",
-      "phase": "Primeira fase",
-      "hStr": 78,
-      "aStr": 76,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021451",
-      "intelligence": {
-        "homeXg": 1.358426531030317,
-        "awayXg": 1.2155734689696829,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
-      "date": "2026-06-24",
-      "time": "16:00",
-      "home": "Bósnia e Herzegovina",
-      "away": "Catar",
-      "group": "B",
-      "phase": "Primeira fase",
-      "hStr": 70,
-      "aStr": 63,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021448",
-      "intelligence": {
-        "homeXg": 1.569904019222045,
-        "awayXg": 1.0640959807779549,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-06-24",
       "time": "19:00",
