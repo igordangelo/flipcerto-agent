@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-25T18:28:59.657Z",
+  "generatedAt": "2026-06-25T21:55:03.543Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,48 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-06-25",
-      "time": "17:00",
-      "home": "Curaçau",
-      "away": "Costa do Marfim",
-      "group": "E",
-      "phase": "Primeira fase",
-      "hStr": 47,
-      "aStr": 76,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021468",
-      "intelligence": {
-        "homeXg": 0.48232691309224174,
-        "awayXg": 2.415673086907758,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
-      "date": "2026-06-25",
-      "time": "17:00",
-      "home": "Equador",
-      "away": "Alemanha",
-      "group": "E",
-      "phase": "Primeira fase",
-      "hStr": 78,
-      "aStr": 88,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021466",
-      "intelligence": {
-        "homeXg": 0.9734190967801769,
-        "awayXg": 1.696580903219823,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-06-25",
       "time": "20:00",
