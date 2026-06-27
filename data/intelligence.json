@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-27T04:29:29.509Z",
+  "generatedAt": "2026-06-27T10:26:54.284Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -279,6 +279,27 @@
       "intelligence": {
         "homeXg": 1.6122542157180613,
         "awayXg": 1.0337457842819386,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-03",
+      "time": "15:00",
+      "home": "Austrália",
+      "away": "Egito",
+      "group": "Segundas de final",
+      "phase": "Segundas de final",
+      "hStr": 74,
+      "aStr": 73,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021515",
+      "intelligence": {
+        "homeXg": 1.3165741840652645,
+        "awayXg": 1.2454258159347353,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
