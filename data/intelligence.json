@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-27T17:33:36.740Z",
+  "generatedAt": "2026-06-27T21:32:49.877Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,48 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-06-27",
-      "time": "18:00",
-      "home": "Panamá",
-      "away": "Inglaterra",
-      "group": "L",
-      "phase": "Primeira fase",
-      "hStr": 58,
-      "aStr": 86,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021508",
-      "intelligence": {
-        "homeXg": 0.5029874369213976,
-        "awayXg": 2.3830125630786023,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
-      "date": "2026-06-27",
-      "time": "18:00",
-      "home": "Croácia",
-      "away": "Gana",
-      "group": "L",
-      "phase": "Primeira fase",
-      "hStr": 82,
-      "aStr": 68,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021509",
-      "intelligence": {
-        "homeXg": 1.8623762545763278,
-        "awayXg": 0.855623745423672,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-06-27",
       "time": "20:30",
