@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-27T21:32:49.877Z",
+  "generatedAt": "2026-06-28T04:56:12.222Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,90 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-06-27",
-      "time": "20:30",
-      "home": "Colômbia",
-      "away": "Portugal",
-      "group": "K",
-      "phase": "Primeira fase",
-      "hStr": 82,
-      "aStr": 88,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021505",
-      "intelligence": {
-        "homeXg": 1.0945009186558108,
-        "awayXg": 1.527499081344189,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
-      "date": "2026-06-27",
-      "time": "20:30",
-      "home": "RD do Congo",
-      "away": "Uzbequistão",
-      "group": "K",
-      "phase": "Primeira fase",
-      "hStr": 59,
-      "aStr": 62,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021500",
-      "intelligence": {
-        "homeXg": 1.1854987304013556,
-        "awayXg": 1.400501269598644,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
-      "date": "2026-06-27",
-      "time": "23:00",
-      "home": "Argélia",
-      "away": "Áustria",
-      "group": "J",
-      "phase": "Primeira fase",
-      "hStr": 69,
-      "aStr": 77,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021497",
-      "intelligence": {
-        "homeXg": 1.0337457842819384,
-        "awayXg": 1.6122542157180615,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
-      "date": "2026-06-27",
-      "time": "23:00",
-      "home": "Jordânia",
-      "away": "Argentina",
-      "group": "J",
-      "phase": "Primeira fase",
-      "hStr": 48,
-      "aStr": 92,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289273/400021495",
-      "intelligence": {
-        "homeXg": 0.2457652696397826,
-        "awayXg": 2.8322347303602173,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-06-28",
       "time": "16:00",
@@ -224,6 +140,69 @@
       }
     },
     {
+      "date": "2026-06-30",
+      "time": "22:00",
+      "home": "México",
+      "away": "Equador",
+      "group": "Segundas de final",
+      "phase": "Segundas de final",
+      "hStr": 79,
+      "aStr": 78,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021520",
+      "intelligence": {
+        "homeXg": 1.3165741840652645,
+        "awayXg": 1.2454258159347353,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-01",
+      "time": "13:00",
+      "home": "Inglaterra",
+      "away": "RD do Congo",
+      "group": "Segundas de final",
+      "phase": "Segundas de final",
+      "hStr": 86,
+      "aStr": 59,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021512",
+      "intelligence": {
+        "homeXg": 2.3497090445805315,
+        "awayXg": 0.5242909554194681,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-01",
+      "time": "17:00",
+      "home": "Bélgica",
+      "away": "Senegal",
+      "group": "Segundas de final",
+      "phase": "Segundas de final",
+      "hStr": 84,
+      "aStr": 78,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021525",
+      "intelligence": {
+        "homeXg": 1.527499081344189,
+        "awayXg": 1.0945009186558108,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
       "date": "2026-07-01",
       "time": "21:00",
       "home": "EUA",
@@ -237,6 +216,69 @@
       "intelligence": {
         "homeXg": 1.6122542157180613,
         "awayXg": 1.0337457842819386,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-02",
+      "time": "16:00",
+      "home": "Espanha",
+      "away": "Áustria",
+      "group": "Segundas de final",
+      "phase": "Segundas de final",
+      "hStr": 89,
+      "aStr": 77,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021519",
+      "intelligence": {
+        "homeXg": 1.7800776574551116,
+        "awayXg": 0.9139223425448884,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-02",
+      "time": "20:00",
+      "home": "Portugal",
+      "away": "Croácia",
+      "group": "Segundas de final",
+      "phase": "Segundas de final",
+      "hStr": 88,
+      "aStr": 82,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021526",
+      "intelligence": {
+        "homeXg": 1.527499081344189,
+        "awayXg": 1.0945009186558108,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-03",
+      "time": "00:00",
+      "home": "Suíça",
+      "away": "Argélia",
+      "group": "Segundas de final",
+      "phase": "Segundas de final",
+      "hStr": 78,
+      "aStr": 69,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021527",
+      "intelligence": {
+        "homeXg": 1.6544969023345295,
+        "awayXg": 1.0035030976654704,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
@@ -279,6 +321,27 @@
       "intelligence": {
         "homeXg": 2.5694039622078737,
         "awayXg": 0.38859603779212626,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-03",
+      "time": "22:30",
+      "home": "Colômbia",
+      "away": "Gana",
+      "group": "Segundas de final",
+      "phase": "Segundas de final",
+      "hStr": 82,
+      "aStr": 68,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021517",
+      "intelligence": {
+        "homeXg": 1.8623762545763278,
+        "awayXg": 0.855623745423672,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
