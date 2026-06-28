@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-28T17:37:53.803Z",
+  "generatedAt": "2026-06-28T21:31:57.772Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-06-28",
-      "time": "16:00",
-      "home": "África do Sul",
-      "away": "Canadá",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 66,
-      "aStr": 76,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021518",
-      "intelligence": {
-        "homeXg": 0.9734190967801769,
-        "awayXg": 1.696580903219823,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-06-29",
       "time": "14:00",
