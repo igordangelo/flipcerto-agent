@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-30T21:49:56.342Z",
+  "generatedAt": "2026-07-01T04:57:02.560Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-06-30",
-      "time": "22:00",
-      "home": "México",
-      "away": "Equador",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 79,
-      "aStr": 78,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021520",
-      "intelligence": {
-        "homeXg": 1.3165741840652645,
-        "awayXg": 1.2454258159347353,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-01",
       "time": "13:00",
@@ -237,6 +216,27 @@
       "intelligence": {
         "homeXg": 1.1249065219970225,
         "awayXg": 1.4850934780029774,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-04",
+      "time": "18:00",
+      "home": "Paraguai",
+      "away": "França",
+      "group": "Oitavas de final",
+      "phase": "Oitavas de final",
+      "hStr": 72,
+      "aStr": 90,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021533",
+      "intelligence": {
+        "homeXg": 0.7438919715094064,
+        "awayXg": 2.0221080284905937,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
