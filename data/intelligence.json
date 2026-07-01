@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-01T15:15:19.283Z",
+  "generatedAt": "2026-07-01T18:18:56.116Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-01",
-      "time": "13:00",
-      "home": "Inglaterra",
-      "away": "RD do Congo",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 86,
-      "aStr": 59,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021512",
-      "intelligence": {
-        "homeXg": 2.3497090445805315,
-        "awayXg": 0.5242909554194681,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-01",
       "time": "17:00",
@@ -258,6 +237,27 @@
       "intelligence": {
         "homeXg": 1.696580903219823,
         "awayXg": 0.9734190967801769,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-05",
+      "time": "21:00",
+      "home": "México",
+      "away": "Inglaterra",
+      "group": "Oitavas de final",
+      "phase": "Oitavas de final",
+      "hStr": 79,
+      "aStr": 86,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021531",
+      "intelligence": {
+        "homeXg": 1.0640959807779549,
+        "awayXg": 1.569904019222045,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
