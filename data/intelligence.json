@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-01T18:18:56.116Z",
+  "generatedAt": "2026-07-01T21:52:27.537Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-01",
-      "time": "17:00",
-      "home": "Bélgica",
-      "away": "Senegal",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 84,
-      "aStr": 78,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021525",
-      "intelligence": {
-        "homeXg": 1.527499081344189,
-        "awayXg": 1.0945009186558108,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-01",
       "time": "21:00",
