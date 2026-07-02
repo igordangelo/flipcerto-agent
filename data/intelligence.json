@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-02T18:04:18.678Z",
+  "generatedAt": "2026-07-02T21:36:56.404Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-02",
-      "time": "16:00",
-      "home": "Espanha",
-      "away": "Áustria",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 89,
-      "aStr": 77,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021519",
-      "intelligence": {
-        "homeXg": 1.7800776574551116,
-        "awayXg": 0.9139223425448884,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-02",
       "time": "20:00",
