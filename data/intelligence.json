@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-02T21:36:56.404Z",
+  "generatedAt": "2026-07-03T04:12:52.759Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,48 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-02",
-      "time": "20:00",
-      "home": "Portugal",
-      "away": "Croácia",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 88,
-      "aStr": 82,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021526",
-      "intelligence": {
-        "homeXg": 1.527499081344189,
-        "awayXg": 1.0945009186558108,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
-      "date": "2026-07-03",
-      "time": "00:00",
-      "home": "Suíça",
-      "away": "Argélia",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 78,
-      "aStr": 69,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021527",
-      "intelligence": {
-        "homeXg": 1.6544969023345295,
-        "awayXg": 1.0035030976654704,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-03",
       "time": "15:00",
@@ -195,6 +153,27 @@
       "intelligence": {
         "homeXg": 1.0640959807779549,
         "awayXg": 1.569904019222045,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-06",
+      "time": "16:00",
+      "home": "Portugal",
+      "away": "Espanha",
+      "group": "Oitavas de final",
+      "phase": "Oitavas de final",
+      "hStr": 88,
+      "aStr": 89,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021529",
+      "intelligence": {
+        "homeXg": 1.2454258159347353,
+        "awayXg": 1.3165741840652645,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
