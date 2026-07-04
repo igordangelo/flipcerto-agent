@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-04T14:02:51.170Z",
+  "generatedAt": "2026-07-04T17:30:59.744Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-04",
-      "time": "14:00",
-      "home": "Canadá",
-      "away": "Marrocos",
-      "group": "Oitavas de final",
-      "phase": "Oitavas de final",
-      "hStr": 76,
-      "aStr": 81,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021530",
-      "intelligence": {
-        "homeXg": 1.1249065219970225,
-        "awayXg": 1.4850934780029774,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-04",
       "time": "18:00",
