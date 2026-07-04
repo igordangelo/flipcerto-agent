@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-04T17:30:59.744Z",
+  "generatedAt": "2026-07-04T21:16:03.802Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-04",
-      "time": "18:00",
-      "home": "Paraguai",
-      "away": "França",
-      "group": "Oitavas de final",
-      "phase": "Oitavas de final",
-      "hStr": 72,
-      "aStr": 90,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021533",
-      "intelligence": {
-        "homeXg": 0.7438919715094064,
-        "awayXg": 2.0221080284905937,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-05",
       "time": "17:00",
