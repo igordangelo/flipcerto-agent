@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-03T21:35:15.250Z",
+  "generatedAt": "2026-07-04T04:06:21.633Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,48 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-03",
-      "time": "19:00",
-      "home": "Argentina",
-      "away": "Cabo Verde",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 92,
-      "aStr": 58,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021521",
-      "intelligence": {
-        "homeXg": 2.5694039622078737,
-        "awayXg": 0.38859603779212626,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
-      "date": "2026-07-03",
-      "time": "22:30",
-      "home": "Colômbia",
-      "away": "Gana",
-      "group": "Segundas de final",
-      "phase": "Segundas de final",
-      "hStr": 82,
-      "aStr": 68,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289287/400021517",
-      "intelligence": {
-        "homeXg": 1.8623762545763278,
-        "awayXg": 0.855623745423672,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-04",
       "time": "14:00",
@@ -174,6 +132,48 @@
       "intelligence": {
         "homeXg": 1.0945009186558108,
         "awayXg": 1.527499081344189,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-07",
+      "time": "13:00",
+      "home": "Argentina",
+      "away": "Egito",
+      "group": "Oitavas de final",
+      "phase": "Oitavas de final",
+      "hStr": 92,
+      "aStr": 73,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021528",
+      "intelligence": {
+        "homeXg": 2.0608323269779887,
+        "awayXg": 0.7171676730220113,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-07",
+      "time": "17:00",
+      "home": "Suíça",
+      "away": "Colômbia",
+      "group": "Oitavas de final",
+      "phase": "Oitavas de final",
+      "hStr": 78,
+      "aStr": 82,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021535",
+      "intelligence": {
+        "homeXg": 1.1552577124283654,
+        "awayXg": 1.4427422875716345,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
