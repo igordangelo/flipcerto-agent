@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-05T17:33:51.447Z",
+  "generatedAt": "2026-07-05T21:30:19.079Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-05",
-      "time": "17:00",
-      "home": "Brasil",
-      "away": "Noruega",
-      "group": "Oitavas de final",
-      "phase": "Oitavas de final",
-      "hStr": 91,
-      "aStr": 81,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021532",
-      "intelligence": {
-        "homeXg": 1.696580903219823,
-        "awayXg": 0.9734190967801769,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-05",
       "time": "21:00",
