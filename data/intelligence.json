@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-04T21:16:03.802Z",
+  "generatedAt": "2026-07-05T04:34:31.141Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -132,6 +132,27 @@
       "intelligence": {
         "homeXg": 1.1552577124283654,
         "awayXg": 1.4427422875716345,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-09",
+      "time": "17:00",
+      "home": "França",
+      "away": "Marrocos",
+      "group": "Quartas de final",
+      "phase": "Quartas de final",
+      "hStr": 90,
+      "aStr": 81,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289289/400021536",
+      "intelligence": {
+        "homeXg": 1.6544969023345295,
+        "awayXg": 1.0035030976654704,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
