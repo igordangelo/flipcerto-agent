@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-05T21:30:19.079Z",
+  "generatedAt": "2026-07-06T04:45:27.336Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-05",
-      "time": "21:00",
-      "home": "México",
-      "away": "Inglaterra",
-      "group": "Oitavas de final",
-      "phase": "Oitavas de final",
-      "hStr": 79,
-      "aStr": 86,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021531",
-      "intelligence": {
-        "homeXg": 1.0640959807779549,
-        "awayXg": 1.569904019222045,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-06",
       "time": "16:00",
@@ -132,6 +111,27 @@
       "intelligence": {
         "homeXg": 1.6544969023345295,
         "awayXg": 1.0035030976654704,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-11",
+      "time": "18:00",
+      "home": "Noruega",
+      "away": "Inglaterra",
+      "group": "Quartas de final",
+      "phase": "Quartas de final",
+      "hStr": 81,
+      "aStr": 86,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289289/400021539",
+      "intelligence": {
+        "homeXg": 1.1249065219970225,
+        "awayXg": 1.4850934780029774,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
