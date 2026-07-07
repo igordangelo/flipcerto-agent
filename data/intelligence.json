@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-07T18:23:52.768Z",
+  "generatedAt": "2026-07-07T21:45:16.810Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-07",
-      "time": "17:00",
-      "home": "Suíça",
-      "away": "Colômbia",
-      "group": "Oitavas de final",
-      "phase": "Oitavas de final",
-      "hStr": 78,
-      "aStr": 82,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289288/400021535",
-      "intelligence": {
-        "homeXg": 1.1552577124283654,
-        "awayXg": 1.4427422875716345,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-09",
       "time": "17:00",
