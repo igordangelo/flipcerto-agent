@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-07T21:45:16.810Z",
+  "generatedAt": "2026-07-08T03:49:44.131Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -69,6 +69,27 @@
       "intelligence": {
         "homeXg": 1.1249065219970225,
         "awayXg": 1.4850934780029774,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-11",
+      "time": "22:00",
+      "home": "Argentina",
+      "away": "Suíça",
+      "group": "Quartas de final",
+      "phase": "Quartas de final",
+      "hStr": 92,
+      "aStr": 78,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289289/400021537",
+      "intelligence": {
+        "homeXg": 1.8623762545763278,
+        "awayXg": 0.855623745423672,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
