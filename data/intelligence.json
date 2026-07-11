@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-11T17:20:14.641Z",
+  "generatedAt": "2026-07-11T21:09:50.265Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-11",
-      "time": "18:00",
-      "home": "Noruega",
-      "away": "Inglaterra",
-      "group": "Quartas de final",
-      "phase": "Quartas de final",
-      "hStr": 81,
-      "aStr": 86,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289289/400021539",
-      "intelligence": {
-        "homeXg": 1.1249065219970225,
-        "awayXg": 1.4850934780029774,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-11",
       "time": "22:00",
