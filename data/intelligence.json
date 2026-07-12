@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-11T21:09:50.265Z",
+  "generatedAt": "2026-07-12T04:02:39.818Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -14,27 +14,6 @@
   },
   "games": [
     {
-      "date": "2026-07-11",
-      "time": "22:00",
-      "home": "Argentina",
-      "away": "Suíça",
-      "group": "Quartas de final",
-      "phase": "Quartas de final",
-      "hStr": 92,
-      "aStr": 78,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289289/400021537",
-      "intelligence": {
-        "homeXg": 1.8623762545763278,
-        "awayXg": 0.855623745423672,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
       "date": "2026-07-14",
       "time": "16:00",
       "home": "França",
@@ -48,6 +27,27 @@
       "intelligence": {
         "homeXg": 1.3165741840652645,
         "awayXg": 1.2454258159347353,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-15",
+      "time": "16:00",
+      "home": "Inglaterra",
+      "away": "Argentina",
+      "group": "Semifinal",
+      "phase": "Semifinal",
+      "hStr": 86,
+      "aStr": 92,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289290/400021540",
+      "intelligence": {
+        "homeXg": 1.0945009186558108,
+        "awayXg": 1.527499081344189,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
