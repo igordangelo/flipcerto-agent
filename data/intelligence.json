@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-14T17:36:50.861Z",
+  "generatedAt": "2026-07-14T21:17:49.750Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -13,27 +13,6 @@
     }
   },
   "games": [
-    {
-      "date": "2026-07-14",
-      "time": "16:00",
-      "home": "França",
-      "away": "Espanha",
-      "group": "Semifinal",
-      "phase": "Semifinal",
-      "hStr": 90,
-      "aStr": 89,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289290/400021541",
-      "intelligence": {
-        "homeXg": 1.3165741840652645,
-        "awayXg": 1.2454258159347353,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
     {
       "date": "2026-07-15",
       "time": "16:00",
@@ -58,17 +37,17 @@
     {
       "date": "2026-07-18",
       "time": "18:00",
-      "home": "RU101",
-      "away": "RU102",
-      "group": "Decisão do 3º lugar",
-      "phase": "Decisão do 3º lugar",
-      "hStr": 70,
+      "home": "França",
+      "away": "RU102 Bronze",
+      "group": "final",
+      "phase": "final",
+      "hStr": 90,
       "aStr": 70,
       "stars": [],
       "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289291/400021542",
       "intelligence": {
-        "homeXg": 1.275,
-        "awayXg": 1.275,
+        "homeXg": 2.09901799482199,
+        "awayXg": 0.6909820051780098,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
