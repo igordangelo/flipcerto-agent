@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-15T17:41:57.815Z",
+  "generatedAt": "2026-07-15T21:17:54.366Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
@@ -14,31 +14,10 @@
   },
   "games": [
     {
-      "date": "2026-07-15",
-      "time": "16:00",
-      "home": "Inglaterra",
-      "away": "Argentina",
-      "group": "Semifinal",
-      "phase": "Semifinal",
-      "hStr": 86,
-      "aStr": 92,
-      "stars": [],
-      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289290/400021540",
-      "intelligence": {
-        "homeXg": 1.0945009186558108,
-        "awayXg": 1.527499081344189,
-        "confidence": 58,
-        "confidenceLabel": "média",
-        "basis": "Poisson + força relativa",
-        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
-        "odds": null
-      }
-    },
-    {
       "date": "2026-07-18",
       "time": "18:00",
       "home": "França",
-      "away": "RU102 Bronze",
+      "away": "Inglaterra Bronze",
       "group": "final",
       "phase": "final",
       "hStr": 90,
@@ -48,6 +27,27 @@
       "intelligence": {
         "homeXg": 2.09901799482199,
         "awayXg": 0.6909820051780098,
+        "confidence": 58,
+        "confidenceLabel": "média",
+        "basis": "Poisson + força relativa",
+        "caveat": "Sem consenso de casas; use como triagem, não como cotação final.",
+        "odds": null
+      }
+    },
+    {
+      "date": "2026-07-19",
+      "time": "16:00",
+      "home": "Espanha",
+      "away": "Argentina",
+      "group": "Final",
+      "phase": "Final",
+      "hStr": 89,
+      "aStr": 92,
+      "stars": [],
+      "fifaUrl": "https://www.fifa.com/pt/match-centre/match/17/285023/289292/400021543",
+      "intelligence": {
+        "homeXg": 1.1854987304013556,
+        "awayXg": 1.400501269598644,
         "confidence": 58,
         "confidenceLabel": "média",
         "basis": "Poisson + força relativa",
