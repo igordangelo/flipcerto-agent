@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-07-30T03:36:09.790Z",
+  "generatedAt": "2026-07-30T06:46:24.682Z",
   "timezone": "America/Sao_Paulo",
   "sources": {
     "fifa": {
-      "status": "fallback: FIFA returned no parseable fixtures",
+      "status": "fallback: page.waitForSelector: Timeout 60000ms exceeded.\nCall log:\n  - waiting for locator('a[href*=\"match-centre/match/\"]') to be visible\n",
       "url": "https://www.fifa.com/pt/tournaments/mens/worldcup/canadamexicousa2026/scores-fixtures?country=BR&wtw-filter=ALL"
     },
     "odds": {
